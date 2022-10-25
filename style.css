@@ -29,6 +29,7 @@ a{
     color: #CECCE7;
     font-weight: bold;
 }
+
 .navbar ul{
     display: flex;
     flex-direction: row;
@@ -95,4 +96,10 @@ a{
 .intro-button a{
     color: #CECCE7;
     font-weight: bold;
-}
+} 
+
+@media (max-width: 760px) {
+    .navbar {
+        display: none;
+    } 
+  }
