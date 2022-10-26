@@ -33,10 +33,10 @@ a {
     display: flex;
     flex-direction: row;
 
-    .navbar li {
+    li {
       margin: 0px 10px;
 
-      .navbar a {
+      a {
         color: #cacaca;
         font-weight: bold;
       }
@@ -48,7 +48,7 @@ a {
   display: flex;
   flex-direction: column;
 
-  .main h1 {
+  h1 {
     color: snow;
   }
 
@@ -58,7 +58,7 @@ a {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-image: url('./img/cover.jpg');
+    background-image: url('../img/cover.jpg');
     background-position: center;
     background-size: cover;
 
@@ -74,7 +74,7 @@ a {
         align-items: center;
         text-align: center;
 
-        .intro-text h4 {
+        h4 {
           font-weight: bold;
           font-size: 16px;
           color: white;
@@ -85,16 +85,16 @@ a {
         display: flex;
         flex-direction: column;
 
-        .intro-button ul {
+        ul {
           display: flex;
           flex-direction: row;
           margin: auto;
 
-          .intro-button li {
+          li {
             margin: 15px;
             font-size: 1.2rem;
 
-            .intro-button a {
+            a {
               color: #cecce7;
               font-weight: bold;
             }

@@ -3,13 +3,14 @@ body {
   margin: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: rgb(100, 100, 100);
 }
 
 li {
   list-style: none;
 }
+
 a {
   text-decoration: none;
 }
@@ -24,21 +25,18 @@ a {
   background-color: rgb(58, 58, 58);
   box-shadow: 0px 4px white;
 }
-.navbar-logo a {
+.site-header .navbar-logo a {
   color: #cecce7;
   font-weight: bold;
 }
-
-.navbar ul {
+.site-header .navbar ul {
   display: flex;
   flex-direction: row;
 }
-
-.navbar li {
+.site-header .navbar ul li {
   margin: 0px 10px;
 }
-
-.navbar a {
+.site-header .navbar ul li a {
   color: #cacaca;
   font-weight: bold;
 }
@@ -47,52 +45,50 @@ a {
   display: flex;
   flex-direction: column;
 }
-
 .main h1 {
   color: snow;
 }
-.section-first {
+.main .section-first {
   height: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('../img/cover.jpg');
+  background-image: url("../img/cover.jpg");
   background-position: center;
   background-size: cover;
 }
-
-.main-content {
+.main .section-first .main-content {
   margin: auto;
 }
-.main-intro h1 {
+.main .section-first .main-content .main-intro h1 {
   font-size: 45px;
   font-style: oblique;
 }
-.intro-text {
+.main .section-first .main-content .intro-text {
   align-items: center;
   text-align: center;
 }
-.intro-text h4 {
+.main .section-first .main-content .intro-text h4 {
   font-weight: bold;
   font-size: 16px;
   color: white;
   letter-spacing: 5px;
 }
-.intro-button {
+.main .section-first .main-content .intro-button {
   display: flex;
   flex-direction: column;
 }
-.intro-button ul {
+.main .section-first .main-content .intro-button ul {
   display: flex;
   flex-direction: row;
   margin: auto;
 }
-.intro-button li {
+.main .section-first .main-content .intro-button ul li {
   margin: 15px;
   font-size: 1.2rem;
 }
-.intro-button a {
+.main .section-first .main-content .intro-button ul li a {
   color: #cecce7;
   font-weight: bold;
 }
@@ -102,3 +98,5 @@ a {
     display: none;
   }
 }
+
+/*# sourceMappingURL=style.css.map */
