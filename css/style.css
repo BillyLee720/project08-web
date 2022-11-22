@@ -3,8 +3,8 @@ body {
   margin: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: rgb(100, 100, 100);
+  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #646464;
 }
 
 li {
@@ -22,20 +22,24 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 10px 25px;
-  background-color: rgb(58, 58, 58);
+  background-color: #3a3a3a;
   box-shadow: 0px 4px white;
 }
+
 .site-header .navbar-logo a {
   color: #cecce7;
   font-weight: bold;
 }
+
 .site-header .navbar-menu {
   display: flex;
   flex-direction: row;
 }
+
 .site-header .navbar-menu li {
   margin: 0px 10px;
 }
+
 .site-header .navbar-menu li a {
   color: #cacaca;
   font-weight: bold;
@@ -45,9 +49,11 @@ a {
   display: flex;
   flex-direction: column;
 }
+
 .main h1 {
   color: snow;
 }
+
 .main .section-first {
   height: 700px;
   display: flex;
@@ -58,45 +64,56 @@ a {
   background-position: center;
   background-size: cover;
 }
+
 .main .section-first .main-content {
   margin: auto;
 }
+
 .main .section-first .main-content .main-intro h1 {
   font-size: 45px;
   font-style: oblique;
 }
+
 .main .section-first .main-content .intro-text {
   align-items: center;
   text-align: center;
 }
+
 .main .section-first .main-content .intro-text h4 {
   font-weight: bold;
   font-size: 16px;
   color: white;
   letter-spacing: 5px;
 }
+
 .main .section-first .main-content .intro-button {
   display: flex;
   flex-direction: column;
 }
+
 .main .section-first .main-content .intro-button ul {
   display: flex;
   flex-direction: row;
   margin: auto;
 }
+
 .main .section-first .main-content .intro-button ul li {
   margin: 15px;
   font-size: 1.2rem;
 }
+
 .main .section-first .main-content .intro-button ul li a {
   color: #cecce7;
   font-weight: bold;
 }
+
 .main .section-second {
   display: flex;
   height: 600px;
   padding: 0 50px;
+  margin: 50px 0;
 }
+
 .main .section-second .second-widget {
   flex: 1 1 50%;
   display: flex;
@@ -105,18 +122,21 @@ a {
   justify-content: center;
   background-color: #eaf0ed;
 }
+
 .main .section-third {
   height: 600px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
+
 .main .section-third .col {
   margin: 10px 10px;
   box-shadow: 6px 6px #333;
 }
+
 .main .section-third .col .con {
-  background-color: rgb(15, 1, 1);
+  background-color: #0f0101;
   height: 500px;
   width: 25vw;
   padding: 20px;
@@ -125,14 +145,17 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .main .section-third .col .con h3 {
   margin: 0;
   color: #fff;
 }
+
 .main .section-third .col .con p {
   margin: 0;
   color: #fff;
 }
+
 .main .section-fourth {
   display: flex;
   height: 300px;
@@ -141,17 +164,20 @@ a {
   align-items: center;
   justify-content: center;
 }
+
 .main .section-fourth .fourth-widget {
   display: flex;
   height: 20vh;
   width: 50vw;
   background-color: #eaf0ed;
 }
+
 .main .section-fifth {
   display: flex;
   height: 600px;
   padding: 0 50px;
 }
+
 .main .section-fifth .fifth-widget {
   flex: 1 1 50%;
   display: flex;
@@ -161,10 +187,31 @@ a {
   background-color: #eaf0ed;
 }
 
+footer {
+  border-top: 1px solid;
+  width: 80%;
+  margin: 50px auto;
+}
+
+footer .footer-items {
+  padding: 20px;
+  display: flex;
+  text-align: center;
+  color: #f3d807;
+}
+
+footer .footer-items .footer-item {
+  width: 33%;
+  padding: 15px;
+}
+
+footer .footer-items .footer-item a {
+  color: #cecce7;
+}
+
 @media (max-width: 760px) {
   .navbar {
     display: none;
   }
 }
-
 /*# sourceMappingURL=style.css.map */
