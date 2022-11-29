@@ -5,7 +5,7 @@ body {
   box-sizing: border-box;
   overflow-x: hidden;
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: rgb(100, 100, 100);
+  background-color: #222831;
 }
 
 li {
@@ -15,7 +15,7 @@ a {
   text-decoration: none;
 }
 
-/*---Navbar---*/
+/*-------Navbar-------*/
 .site-header {
   display: flex;
   flex-direction: row;
@@ -23,11 +23,11 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 10px 25px;
-  background-color: rgb(58, 58, 58);
+  background-color: #393e46;
   box-shadow: 0px 4px white;
 
   .navbar-logo a {
-    color: #cecce7;
+    color: #eeeeee;
     font-weight: bold;
   }
 
@@ -39,7 +39,7 @@ a {
       margin: 0px 10px;
 
       a {
-        color: #cacaca;
+        color: #eeeeee;
         font-weight: bold;
       }
     }
@@ -52,7 +52,7 @@ a {
   flex-direction: column;
 
   h1 {
-    color: snow;
+    color: #ffd369;
   }
 
   .section-first {
@@ -80,7 +80,7 @@ a {
         h4 {
           font-weight: bold;
           font-size: 16px;
-          color: white;
+          color: #eeeeee;
           letter-spacing: 5px;
         }
       }
@@ -98,7 +98,7 @@ a {
             font-size: 1.2rem;
 
             a {
-              color: #cecce7;
+              color: #ffd369;
               font-weight: bold;
             }
           }
@@ -119,9 +119,15 @@ a {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: #eaf0ed;
+      background-color: #393e46;
+
+      h3 {
+        margin: 20px 20px;
+        color: #eeeeee;
+      }
     }
   }
+
   .section-third {
     height: 600px;
     display: flex;
@@ -130,58 +136,90 @@ a {
 
     .col {
       margin: 10px 10px;
-      box-shadow: 6px 6px #333;
 
       .con {
-        background-color: rgb(15, 1, 1);
         height: 500px;
         width: 25vw;
-        padding: 20px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        h3 {
-          margin: 0;
-          color: #fff;
+        img {
+          position: absolute;
+          height: 500px;
+          width: 25vw;
+          border-radius: 10px;
         }
-        p {
-          margin: 0;
-          color: #fff;
+
+        .con-text {
+          position: relative;
+          align-items: center;
+          text-align: center;
+          margin: 230px auto;
+          font-size: 40px;
+
+          a {
+            background-color: #393e46;
+            color: #eeeeee;
+            opacity: 0.3;
+          }
+        }
+      }
+      .con:hover {
+        transform: scale(1.2);
+        transition: 0.5s;
+
+        li {
+          transform: scale(1.2);
+          transition: 0.5s;
+        }
+
+        a:hover {
+          opacity: 1;
         }
       }
     }
   }
+}
 
-  .section-fourth {
+.section-fourth {
+  display: flex;
+  height: 300px;
+  padding: 0 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .fourth-widget {
     display: flex;
-    height: 300px;
-    padding: 0 50px;
+    width: 50vw;
+    background-color: #ffd369;
+
+    h3 {
+      margin: 10px 10px;
+      color: #eeeeee;
+    }
+  }
+}
+
+.section-fifth {
+  display: flex;
+  height: 600px;
+  padding: 0 50px;
+  margin: 50px 0;
+
+  .fifth-widget {
+    flex: 1 1 50%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #393e46;
 
-    .fourth-widget {
-      display: flex;
-      height: 20vh;
-      width: 50vw;
-      background-color: #eaf0ed;
-    }
-  }
-
-  .section-fifth {
-    display: flex;
-    height: 600px;
-    padding: 0 50px;
-
-    .fifth-widget {
-      flex: 1 1 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: #eaf0ed;
+    h3 {
+      margin: 20px 20px;
+      color: #eeeeee;
     }
   }
 }
@@ -195,26 +233,20 @@ footer {
     padding: 20px;
     display: flex;
     text-align: center;
-    color: rgb(243, 216, 7);
+    color: #ffd369;
 
     .footer-item {
       width: 33%;
       padding: 15px;
 
       a {
-        color: #cecce7;
+        color: #eeeeee;
       }
     }
   }
 }
 
-@media (max-width: 760px) {
-  .navbar {
-    display: none;
-  }
-}
-
-/*---login---*/
+/*------login------*/
 .login-page {
   display: flex;
   flex-direction: column;
@@ -245,5 +277,11 @@ footer {
     Button {
       margin-top: 15px;
     }
+  }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    display: none;
   }
 }

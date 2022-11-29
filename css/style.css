@@ -6,7 +6,7 @@ body {
           box-sizing: border-box;
   overflow-x: hidden;
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #646464;
+  background-color: #222831;
 }
 
 li {
@@ -34,13 +34,13 @@ a {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 10px 25px;
-  background-color: #3a3a3a;
+  background-color: #393e46;
   -webkit-box-shadow: 0px 4px white;
           box-shadow: 0px 4px white;
 }
 
 .site-header .navbar-logo a {
-  color: #cecce7;
+  color: #eeeeee;
   font-weight: bold;
 }
 
@@ -59,7 +59,7 @@ a {
 }
 
 .site-header .navbar-menu li a {
-  color: #cacaca;
+  color: #eeeeee;
   font-weight: bold;
 }
 
@@ -75,7 +75,7 @@ a {
 }
 
 .main h1 {
-  color: snow;
+  color: #ffd369;
 }
 
 .main .section-first {
@@ -115,7 +115,7 @@ a {
 .main .section-first .main-content .intro-text h4 {
   font-weight: bold;
   font-size: 16px;
-  color: white;
+  color: #eeeeee;
   letter-spacing: 5px;
 }
 
@@ -146,7 +146,7 @@ a {
 }
 
 .main .section-first .main-content .intro-button ul li a {
-  color: #cecce7;
+  color: #ffd369;
   font-weight: bold;
 }
 
@@ -176,7 +176,12 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #eaf0ed;
+  background-color: #393e46;
+}
+
+.main .section-second .second-widget h3 {
+  margin: 20px 20px;
+  color: #eeeeee;
 }
 
 .main .section-third {
@@ -194,15 +199,11 @@ a {
 
 .main .section-third .col {
   margin: 10px 10px;
-  -webkit-box-shadow: 6px 6px #333;
-          box-shadow: 6px 6px #333;
 }
 
 .main .section-third .col .con {
-  background-color: #0f0101;
   height: 500px;
   width: 25vw;
-  padding: 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: -webkit-box;
@@ -217,17 +218,48 @@ a {
           justify-content: space-between;
 }
 
-.main .section-third .col .con h3 {
-  margin: 0;
-  color: #fff;
+.main .section-third .col .con img {
+  position: absolute;
+  height: 500px;
+  width: 25vw;
+  border-radius: 10px;
 }
 
-.main .section-third .col .con p {
-  margin: 0;
-  color: #fff;
+.main .section-third .col .con .con-text {
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  margin: 230px auto;
+  font-size: 40px;
 }
 
-.main .section-fourth {
+.main .section-third .col .con .con-text a {
+  background-color: #393e46;
+  color: #eeeeee;
+  opacity: 0.3;
+}
+
+.main .section-third .col .con:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.main .section-third .col .con:hover li {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.main .section-third .col .con:hover a:hover {
+  opacity: 1;
+}
+
+.section-fourth {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -245,24 +277,29 @@ a {
           justify-content: center;
 }
 
-.main .section-fourth .fourth-widget {
+.section-fourth .fourth-widget {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 20vh;
   width: 50vw;
-  background-color: #eaf0ed;
+  background-color: #ffd369;
 }
 
-.main .section-fifth {
+.section-fourth .fourth-widget h3 {
+  margin: 10px 10px;
+  color: #eeeeee;
+}
+
+.section-fifth {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   height: 600px;
   padding: 0 50px;
+  margin: 50px 0;
 }
 
-.main .section-fifth .fifth-widget {
+.section-fifth .fifth-widget {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 50%;
           flex: 1 1 50%;
@@ -279,7 +316,12 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #eaf0ed;
+  background-color: #393e46;
+}
+
+.section-fifth .fifth-widget h3 {
+  margin: 20px 20px;
+  color: #eeeeee;
 }
 
 footer {
@@ -294,7 +336,7 @@ footer .footer-items {
   display: -ms-flexbox;
   display: flex;
   text-align: center;
-  color: #f3d807;
+  color: #ffd369;
 }
 
 footer .footer-items .footer-item {
@@ -303,7 +345,7 @@ footer .footer-items .footer-item {
 }
 
 footer .footer-items .footer-item a {
-  color: #cecce7;
+  color: #eeeeee;
 }
 
 @media (max-width: 760px) {
