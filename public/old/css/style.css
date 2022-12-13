@@ -354,7 +354,7 @@ footer .footer-items .footer-item a {
   }
 }
 
-/*---login---*/
+/*------login------*/
 .login-page {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -367,31 +367,52 @@ footer .footer-items .footer-item a {
       -ms-flex-align: center;
           align-items: center;
   text-align: center;
-  background-color: #cacaca;
-  width: 30%;
+  background: #cacaca;
+  width: 400px;
+  height: 300px;
   margin: 80px auto;
   max-height: 500px;
+  border-radius: 10px;
 }
 
 .login-page .login-logo {
-  height: 75px;
-  width: 30px;
+  height: 100px;
+  width: 400px;
   background-color: #c7f010;
+  background-image: url(https://i.picsum.photos/id/111/400/100.jpg?hmac=AAt4fvlqHDjQ4cMMxHBL_VEAMi5CkxNc1_UREu4EkOk);
+  border-radius: 10px 10px 0 0;
+  background-size: cover;
+  background-position: center,center;
 }
 
-.login-page .login-item {
+.login-page .login-test {
+  background-image: url(https://i.picsum.photos/id/548/400/300.jpg?hmac=qbq1qvAWillWzKmmvS7KxGR7yDmTeeB49cDCCrR6fKU);
+  -webkit-backdrop-filter: blur(25px);
+          backdrop-filter: blur(25px);
+  background-size: cover;
+  background-position: center,center;
+  width: 400px;
+  height: 100%;
+  border-radius: 0 0 10px 10px;
+}
+
+.login-page .login-test .login-item {
   margin: 2px;
 }
 
-.login-page .login-item .login-account {
+.login-page .login-test .login-item .login-account {
   margin-top: 15px;
 }
 
-.login-page .login-item .login-password {
+.login-page .login-test .login-item .login-password {
   margin-top: 15px;
 }
 
-.login-page .login-item Button {
+.login-page .login-test .login-item Button {
   margin-top: 15px;
+}
+
+.login-page .login-test .login-footer a {
+  font-size: 15px;
 }
 /*# sourceMappingURL=style.css.map */
