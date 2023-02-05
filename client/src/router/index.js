@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Index from '../views/index.vue';
 import AboutView from '../views/AboutView.vue';
 import LoginView from '../views/LoginView.vue';
-import Login from '../components/Login.vue';
-import Register from '../components/Register.vue';
-import ForgetPassword from '../components/ForgetPassword.vue';
-import Lodd from '../views/lodd.vue';
+import Login from '../components/Login/Login.vue';
+import Register from '../components/Login/Register.vue';
+import ForgetPassword from '../components/Login/ForgetPassword.vue';
+import Captcha from '../components/Login/Captcha.vue';
 
 const routes = [
   {
@@ -17,11 +17,6 @@ const routes = [
     path: '/about',
     name: 'AboutView',
     component: AboutView,
-  },
-  {
-    path: '/lodd',
-    name: 'Lodd',
-    component: Lodd,
   },
   {
     path: '/loginView',
@@ -42,6 +37,11 @@ const routes = [
         path: 'register',
         name: 'Register',
         component: Register,
+      },
+      {
+        path: 'captcha',
+        name: 'Captcha',
+        component: Captcha,
       },
     ],
   },
