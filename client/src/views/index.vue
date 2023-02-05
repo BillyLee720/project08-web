@@ -112,7 +112,7 @@
   </div>
 </template>
 
-<script>
+<!-- <script>
 import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
@@ -121,7 +121,7 @@ export default {
     HelloWorld,
   },
 };
-</script>
+</script> -->
 
 <style>
 .main {

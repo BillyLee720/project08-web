@@ -14,7 +14,7 @@
       <li><router-link to="/">商城</router-link></li>
       <li><router-link to="/">計算機</router-link></li>
       <li><router-link to="/">APP</router-link></li>
-      <li><router-link to="/login">登入</router-link></li>
+      <li><router-link to="/LoginView/login">登入</router-link></li>
     </ul>
   </header>
 </template>
@@ -44,7 +44,7 @@ export default {
   padding: 10px 25px;
   background-color: #393e46;
   -webkit-box-shadow: 0px 4px white;
-  box-shadow: 0px 4px white;
+  box-shadow: 0px 1px white;
 }
 
 .site-header .navbar-logo a {

@@ -1,24 +1,49 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import Index from '../views/index.vue';
 import AboutView from '../views/AboutView.vue';
 import LoginView from '../views/LoginView.vue';
-import Login from '../views/login.vue';
+import Login from '../components/Login.vue';
+import Register from '../components/Register.vue';
+import ForgetPassword from '../components/ForgetPassword.vue';
+import Lodd from '../views/lodd.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
+    name: 'Home',
+    component: Index,
   },
   {
     path: '/about',
-    name: 'about',
+    name: 'AboutView',
     component: AboutView,
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login,
+    path: '/lodd',
+    name: 'Lodd',
+    component: Lodd,
+  },
+  {
+    path: '/loginView',
+    name: 'LoginView',
+    component: LoginView,
+    children: [
+      {
+        path: 'login',
+        name: 'Login',
+        component: Login,
+      },
+      {
+        path: 'forgetPassword',
+        name: 'ForgetPassword',
+        component: ForgetPassword,
+      },
+      {
+        path: 'register',
+        name: 'Register',
+        component: Register,
+      },
+    ],
   },
 ];
 
