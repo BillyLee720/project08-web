@@ -3,7 +3,7 @@
     <section class="section-first">
       <div class="main-content">
         <div class="main-intro">
-          <h1>Welecome to this Page</h1>
+          <h1>Welecome to High-Fitness</h1>
         </div>
         <div class="intro-text">
           <h4>這裡是一個提供紀錄健身狀況以及討論健身相關的網站</h4>
@@ -11,10 +11,10 @@
         <div class="intro-button">
           <ul>
             <li>
-              <a href="">註冊</a>
+              <router-link to="/register">註冊</router-link>
             </li>
             <li>
-              <a href="">登入</a>
+              <router-link to="/login">登入</router-link>
             </li>
           </ul>
         </div>
@@ -23,7 +23,7 @@
     <section class="section-second">
       <div class="second-widget">
         <img
-          src="https://i.picsum.photos/id/400/600/450.jpg?hmac=RY6wJQv-Bziej3kqplEOeN43W_EE0kG47InQSyCKDmc"
+          src="../assets/exercising-in-gym-2022-03-30-20-23-45-utc.jpg"
           width="100%"
           height="100%"
         />
@@ -45,10 +45,10 @@
         <div class="con">
           <div class="con-pic">
             <img
-              src="https://i.picsum.photos/id/12/500/500.jpg?hmac=eDPFWf-MrW9y-NrkWpEFk3Ogo9qpZ985kimtQNMNm94"
+              src="../assets/couple-with-kettlebells-in-cross-training-gym-2022-03-04-01-53-33-utc.jpg"
             />
             <div class="con-text">
-              <li><a href="">關於我</a></li>
+              <router-link to="/about">關於我們</router-link>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="con">
           <div class="con-pic">
             <img
-              src="https://i.picsum.photos/id/482/200/300.jpg?hmac=sZqH9D718kRNYORntdoWP-EehCC83NaK3M-KTWvABIg"
+              src="../assets/young-arab-guy-drinking-protein-shake-from-bottle-2022-12-16-08-10-45-utc.jpg"
             />
             <div class="con-text">
               <li><a href="">商城</a></li>
@@ -69,7 +69,7 @@
         <div class="con">
           <div class="con-pic">
             <img
-              src="https://i.picsum.photos/id/432/200/300.jpg?hmac=S0muAtaN6T0PXbBlf5O-UL0chTPM6i9FReOIs0IJlDU"
+              src="../assets/woman-using-phone-at-gym-2021-08-26-15-34-40-utc.jpg"
             />
             <div class="con-text">
               <li><a href="">APP</a></li>
@@ -78,7 +78,7 @@
         </div>
       </div>
     </section>
-    <section class="section-fourth">
+    <!-- <section class="section-fourth">
       <div class="fourth-widget">
         <div class="fourth-text">
           <h3>
@@ -89,7 +89,7 @@
           </h3>
         </div>
       </div>
-    </section>
+    </section> -->
     <section class="section-fifth">
       <div class="fifth-widget">
         <div class="fifth-text">
@@ -103,7 +103,7 @@
       </div>
       <div class="fifth-widget">
         <img
-          src="https://i.picsum.photos/id/866/600/450.jpg?hmac=39CtuIS6xnl7zH2eH3Y54hJacaYeEc2YpPe6_0uL__M"
+          src="../assets/confident-young-woman-exercising-with-battle-rope-2022-12-16-13-57-14-utc.jpg"
           width="100%"
           height="100%"
         />
@@ -124,6 +124,9 @@ export default {
 </script> -->
 
 <style>
+@import url('https://fonts.cdnfonts.com/css/vogue');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@300&family=Noto+Serif+TC:wght@200&display=swap');
 .main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -139,7 +142,7 @@ export default {
 }
 
 .main .section-first {
-  height: 700px;
+  height: 850px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -151,9 +154,11 @@ export default {
   -ms-flex-align: center;
   align-items: center;
   text-align: center;
-  background-image: url('../assets/cover.jpg');
+  background-image: url('../assets/athlete-in-gym-2021-09-24-03-26-55-utc.jpg');
+  /* opacity: 0.85; */
   background-position: center;
   background-size: cover;
+  top: 100px;
 }
 
 .main .section-first .main-content {
@@ -162,7 +167,9 @@ export default {
 
 .main .section-first .main-content .main-intro h1 {
   font-size: 45px;
-  font-style: oblique;
+  font-family: 'Vogue', sans-serif;
+  color: #eeeeee;
+  letter-spacing: 0.5rem;
 }
 
 .main .section-first .main-content .intro-text {
@@ -173,7 +180,7 @@ export default {
 }
 
 .main .section-first .main-content .intro-text h4 {
-  font-weight: bold;
+  font-family: 'Noto Serif TC', Sans-serif;
   font-size: 16px;
   color: #eeeeee;
   letter-spacing: 5px;
@@ -197,14 +204,24 @@ export default {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  margin: auto;
+  justify-content: center;
 }
 
 .main .section-first .main-content .intro-button ul li {
   margin: 15px;
   font-size: 1.2rem;
+  font-family: 'Noto Serif TC', Sans-serif;
+  letter-spacing: 0.3rem;
+  border-style: solid;
+  border-width: 0 0 2px;
+  border-color: #eeeeee;
 }
 
+.intro-button li:hover {
+  transition: 0.3s;
+  transform: scale(1.1);
+  opacity: 0.8;
+}
 .main .section-first .main-content .intro-button ul li a {
   color: #ffd369;
   font-weight: bold;
@@ -282,6 +299,7 @@ export default {
   position: absolute;
   height: 500px;
   width: 25vw;
+  object-fit: cover;
   border-radius: 10px;
 }
 
