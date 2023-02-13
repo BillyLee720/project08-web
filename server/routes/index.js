@@ -7,6 +7,7 @@ router.get('/', function (req, res, next) {
   res.send('users首頁');
 });
 
-router.use('/users', users);
+// router.route('/login');
+// router.use('/users', users);
 
 module.exports = router;

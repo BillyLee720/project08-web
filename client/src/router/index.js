@@ -6,6 +6,7 @@ import Login from '../components/Login/Login.vue';
 import Register from '../components/Login/Register.vue';
 import ForgetPassword from '../components/Login/ForgetPassword.vue';
 import Captcha from '../components/Login/Captcha.vue';
+import Test from '../views/test.vue';
 
 const routes = [
   {
@@ -19,24 +20,24 @@ const routes = [
     component: AboutView,
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  },
+  {
     path: '/loginView',
     name: 'LoginView',
     component: LoginView,
     children: [
       {
-        path: 'login',
-        name: 'Login',
-        component: Login,
-      },
-      {
         path: 'forgetPassword',
         name: 'ForgetPassword',
         component: ForgetPassword,
-      },
-      {
-        path: 'register',
-        name: 'Register',
-        component: Register,
       },
       {
         path: 'captcha',
@@ -44,6 +45,11 @@ const routes = [
         component: Captcha,
       },
     ],
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test,
   },
 ];
 

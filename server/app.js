@@ -17,11 +17,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
 app.use('/users', usersRouter);
-
+app.get('/status', (req, res) => {
+  res.send({
+    message: 'hello',
+  });
+});
+app.post('/register', (req, res) => {
+  res.send({
+    message: `hello ${req.body.email}`,
+  });
+});
+app.get('/', function (req, res) {
+  res.set('Access-Control-Allow-Origin: *');
+  res.end('hello world');
+});
+// app.use(cors());
 app.use(
   cors({
-    origin: ['http://localhost:8080/'],
+    origin: ['http://localhost:8080'],
   })
 );
 
+app.listen(process.env.PORT || 8081);
 module.exports = app;

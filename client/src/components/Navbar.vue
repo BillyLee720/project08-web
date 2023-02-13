@@ -14,7 +14,7 @@
       <li><router-link to="/">商城</router-link></li>
       <li><router-link to="/">計算機</router-link></li>
       <li><router-link to="/">APP</router-link></li>
-      <li><router-link to="/LoginView/login">登入</router-link></li>
+      <li><router-link to="/login">登入</router-link></li>
     </ul>
   </header>
 </template>
