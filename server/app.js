@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users/index');
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -17,20 +18,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
 app.use('/users', usersRouter);
-app.get('/status', (req, res) => {
-  res.send({
-    message: 'hello',
-  });
-});
+// app.get('/status', (req, res) => {
+//   res.send({
+//     message: 'hello',
+//   });
+// });
 app.post('/register', (req, res) => {
   res.send({
-    message: `hello ${req.body.email}`,
+    message: `hello ${req.body.email}! your user was registered! have fun!`,
   });
 });
-app.get('/', function (req, res) {
-  res.set('Access-Control-Allow-Origin: *');
-  res.end('hello world');
-});
+// app.get('/', function (req, res) {
+//   res.set('Access-Control-Allow-Origin: *');
+//   res.end('hello world');
+// });
 // app.use(cors());
 app.use(
   cors({

@@ -17,7 +17,7 @@
       <div class="login-item">
         <div class="login-account">
           <label>帳號</label>
-          <input type="email" name="email" v-model="email" size="25px" />
+          <input type="email" name="email" v-model="email" placeholder="email" size="25px" />
         </div>
         <div class="login-password">
           <label>密碼</label>
@@ -25,8 +25,9 @@
             type="password"
             name="password"
             v-model="password"
+            placeholder="password"
             size="25px"
-            rules="usernameRules"
+            
           />
         </div>
         <Button @click="register">登入</Button>
@@ -48,23 +49,24 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data() {
     return {
-      email: 'abc',
-      password: '123',
+      email: '',
+      password: '',
     };
   },
 
   methods: {
+    
     async register() {
-      try {
+      
         const response = await AuthenticationService.register({
           email: this.email,
           password: this.password,
         });
         console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+      } 
     },
-  },
-};
+  }
+
+  
+
 </script>
