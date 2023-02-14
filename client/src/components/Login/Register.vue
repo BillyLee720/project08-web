@@ -1,46 +1,37 @@
 <template>
-  <div>
-    <div class="login-test">
-      <!-- <div class="login-item">
-        <form @submit.prevent="userLogin">
-          <div class="login-account">
-            <label>Account</label>
-            <input type="email" v-model="user.email" />
-          </div>
-          <div class="login-password">
-            <label>Password</label>
-            <input type="password" v-model="user.password" />
-          </div>
-  
-          <button type="submit">登入</button>
-        </form> -->
-      <div class="login-item">
-        <div class="login-account">
-          <label>帳號</label>
-          <input type="email" name="email" v-model="email" placeholder="email" size="25px" />
-        </div>
-        <div class="login-password">
-          <label>密碼</label>
-          <input
-            type="password"
-            name="password"
-            v-model="password"
-            placeholder="password"
-            size="25px"
-            
-          />
-        </div>
+  <div class="login-page">
+    <!-- <div class="login-title"></div> -->
+    <div class="login-item">
+      <div class="login-account">
+        <label>帳號</label>
+        <input type="email" name="email" v-model="email" size="25px" />
+      </div>
+      <div class="login-password">
+        <label>密碼</label>
+        <input
+          type="password"
+          name="password"
+          v-model="password"
+          size="25px"
+          rules="usernameRules"
+        />
+      </div>
+      <div class="submit-botton">
         <Button @click="register">登入</Button>
       </div>
-      <div class="login-footer">
+      <div class="another">
+        <router-link to="/register">註冊</router-link>
+        <router-link to="/forgetPassword">忘記密碼</router-link>
+      </div>
+    </div>
+    <!-- <div class="login-footer">
         <div>
           <p><a href="/LoginView/register">註冊</a></p>
         </div>
         <div>
           <p><a href="/LoginView/forgetPassword">忘記密碼</a></p>
         </div>
-      </div>
-    </div>
+      </div> -->
   </div>
 </template>
 
@@ -49,24 +40,85 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      email: 'abc',
+      password: '123',
     };
   },
 
   methods: {
-    
     async register() {
-      
+      try {
         const response = await AuthenticationService.register({
           email: this.email,
           password: this.password,
         });
         console.log(response.data);
-      } 
+      } catch (error) {
+        console.log(error);
+      }
     },
-  }
-
-  
-
+  },
+};
 </script>
+<style>
+.login-page {
+  display: flex;
+  justify-content: center; /*水平置中*/
+  align-items: center;
+  background: #eeeeee;
+  width: 400px;
+  height: 800px;
+  margin: 80px auto;
+  max-height: 500px;
+  border-radius: 10px;
+}
+
+.login-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 500px;
+}
+
+/* .login-page .login-title {
+  height: 250px;
+  width: 400px;
+  background-color: #c7f010;
+  background-image: url(https://i.picsum.photos/id/111/400/100.jpg?hmac=AAt4fvlqHDjQ4cMMxHBL_VEAMi5CkxNc1_UREu4EkOk);
+  border-radius: 10px 10px 0 0;
+  background-size: cover;
+  background-position: center, center;
+}
+
+.login-page .login-test {
+  background-image: url(https://i.picsum.photos/id/548/400/300.jpg?hmac=qbq1qvAWillWzKmmvS7KxGR7yDmTeeB49cDCCrR6fKU);
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+  background-size: cover;
+  background-position: center, center;
+  width: 400px;
+  height: 100%;
+  border-radius: 0 0 10px 10px;
+} */
+
+.login-page .login-test .login-item {
+  margin: 2px;
+}
+
+.login-page .login-test .login-item .login-account {
+  margin-top: 15px;
+}
+
+.login-page .login-test .login-item .login-password {
+  margin-top: 15px;
+}
+
+.login-page .login-test .login-item Button {
+  margin-top: 15px;
+}
+
+.login-page .login-test .login-footer a {
+  font-size: 15px;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <header class="site-header">
     <div class="navbar-logo">
-      <a href="">High-Fitness</a>
+      <router-link to="/">High-Fitness</router-link>
     </div>
     <!-- <input id="menu-toggle" type="checkbox" /> -->
     <label class="menu-button-container" for="menu-toggle">
@@ -9,12 +9,24 @@
     </label>
 
     <ul class="navbar-menu">
-      <li><router-link to="/">首頁</router-link></li>
-      <li><router-link to="/about">關於</router-link></li>
-      <li><router-link to="/">商城</router-link></li>
-      <li><router-link to="/">計算機</router-link></li>
-      <li><router-link to="/">APP</router-link></li>
-      <li><router-link to="/login">登入</router-link></li>
+      <li>
+        <router-link to="/"><span>首頁</span></router-link>
+      </li>
+      <li>
+        <router-link to="/about"><span>關於</span></router-link>
+      </li>
+      <li>
+        <router-link to="/"><span>商城</span></router-link>
+      </li>
+      <li>
+        <router-link to="/"><span>計算機</span></router-link>
+      </li>
+      <li>
+        <router-link to="/"><span>APP</span></router-link>
+      </li>
+      <li>
+        <router-link to="/login"><span>登入</span></router-link>
+      </li>
     </ul>
   </header>
 </template>
@@ -53,6 +65,7 @@ export default {
   font-weight: bold;
   font-size: 2.5rem;
   font-family: 'Babylonica', cursive;
+  text-shadow: 0.5px 1px 0.2em #eeeeee73;
 }
 
 .site-header .navbar-menu {
@@ -69,15 +82,19 @@ export default {
   margin: 0px 10px;
 }
 
-.site-header .navbar-menu li a {
+.site-header .navbar-menu li span {
   color: #eeeeee;
   font-weight: 300;
   font-family: 'Noto Sans HK', sans-serif;
 }
 
-.navbar-menu li:hover {
-  transition: 0.3s;
-  transform: scale(1.1);
+.navbar-menu li span:hover {
+  transition: 0.1s;
   color: #ffd369;
+  border-bottom: #eeeeee 1px solid;
+}
+.navbar-menu li:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
 }
 </style>

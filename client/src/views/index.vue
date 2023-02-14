@@ -314,15 +314,17 @@ export default {
 }
 
 .main .section-third .col .con .con-text a {
-  background-color: #393e46;
+  border-radius: 5px;
   color: #eeeeee;
-  opacity: 0.3;
+  text-shadow: 3px 1px 2px #393e46;
+  opacity: 0.8;
 }
 
 .main .section-third .col .con:hover {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
   -webkit-transition: 0.5s;
+
   transition: 0.5s;
 }
 
@@ -335,6 +337,9 @@ export default {
 
 .main .section-third .col .con:hover a:hover {
   opacity: 1;
+  border: #393e46 2px solid;
+  background-color: #393e46;
+  transition: 0.05s;
 }
 
 .section-fourth {
