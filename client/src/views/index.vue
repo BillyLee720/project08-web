@@ -6,15 +6,15 @@
           <h1>Welecome to High-Fitness</h1>
         </div>
         <div class="intro-text">
-          <h4>這裡是一個提供紀錄健身狀況以及討論健身相關的網站</h4>
+          <h4>這裡是一個提供紀錄健身狀況的平台</h4>
         </div>
         <div class="intro-button">
           <ul>
             <li>
-              <router-link to="/register">註冊</router-link>
+              <router-link to="/register"><span>註冊</span></router-link>
             </li>
             <li>
-              <router-link to="/login">登入</router-link>
+              <router-link to="/login"><span>登入</span></router-link>
             </li>
           </ul>
         </div>
@@ -30,12 +30,7 @@
       </div>
       <div class="second-widget">
         <div class="second-text">
-          <h3>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            unde impedit sit eaque veritatis possimus ipsam obcaecati omnis
-            totam voluptate! Natus enim dicta laborum error consequatur hic.
-            Quod, commodi corrupti!
-          </h3>
+          <h3>這裡是一個免費的健身網站及APP，提供紀錄平常的飲食及健身情況。</h3>
         </div>
       </div>
     </section>
@@ -93,17 +88,12 @@
     <section class="section-fifth">
       <div class="fifth-widget">
         <div class="fifth-text">
-          <h3>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptatibus quae veniam quis sequi, numquam similique pariatur
-            placeat, laborum expedita ipsam, sed consequatur in nostrum tempora.
-            Perspiciatis reiciendis modi maxime quaerat?
-          </h3>
+          <h3>APP提供了更詳細的UI介面，能夠更準確的紀錄</h3>
         </div>
       </div>
       <div class="fifth-widget">
         <img
-          src="../assets/confident-young-woman-exercising-with-battle-rope-2022-12-16-13-57-14-utc.jpg"
+          src="../assets/using-fitness-app-on-smartphone-2021-09-30-19-29-34-utc.jpg"
           width="100%"
           height="100%"
         />
@@ -216,7 +206,9 @@ export default {
   border-width: 0 0 2px;
   border-color: #eeeeee;
 }
-
+.main .section-first .main-content .intro-button ul li span {
+  margin: auto;
+}
 .intro-button li:hover {
   transition: 0.3s;
   transform: scale(1.1);

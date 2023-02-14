@@ -2,6 +2,16 @@
   <div class="login-page">
     <!-- <div class="login-title"></div> -->
     <div class="login-item">
+      <div class="login-name">
+        <label>姓名</label>
+        <input
+          type="Name"
+          name="Name"
+          v-model="Name"
+          size="25px"
+          rules="usernameRules"
+        />
+      </div>
       <div class="login-account">
         <label>帳號</label>
         <input type="email" name="email" v-model="email" size="25px" />
@@ -16,12 +26,12 @@
           rules="usernameRules"
         />
       </div>
-      <div class="submit-botton">
-        <Button @click="register">登入</Button>
+
+      <div class="submit-button">
+        <Button class="register-button" @click="register">註冊</Button>
       </div>
-      <div class="another">
-        <router-link to="/register">註冊</router-link>
-        <router-link to="/forgetPassword">忘記密碼</router-link>
+      <div class="register-foot">
+        <router-link to="/login">已經有會員?</router-link>
       </div>
     </div>
     <!-- <div class="login-footer">
@@ -61,16 +71,18 @@ export default {
 };
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap');
 .login-page {
   display: flex;
   justify-content: center; /*水平置中*/
   align-items: center;
-  background: #eeeeee;
+  background: #ffffffad;
   width: 400px;
   height: 800px;
   margin: 80px auto;
   max-height: 500px;
   border-radius: 10px;
+  box-shadow: 0px 0px 3px #eeeeee;
 }
 
 .login-item {
@@ -120,5 +132,53 @@ export default {
 
 .login-page .login-test .login-footer a {
   font-size: 15px;
+}
+.login-account {
+  margin: 10px;
+}
+.login-password {
+  margin: 10px;
+}
+.login-name {
+  margin: 10px;
+}
+.login-item label {
+  /* font-weight: bold; */
+  font-family: 'Noto Serif TC', Sans-serif;
+}
+.login-item input {
+  border: none;
+  box-sizing: border-box;
+  padding: 8px 5px;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+.register-button {
+  border: none;
+  padding: 10px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.register-button:hover {
+  background-color: rgb(196, 248, 185);
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+.register-foot {
+  margin-top: 15px;
+}
+.register-foot a {
+  color: #393e46;
+  font-family: 'Noto Serif TC', Sans-serif;
+  font-weight: bold;
+}
+.register-foot a:hover {
+  border-bottom: white 1px solid;
 }
 </style>
