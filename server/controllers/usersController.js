@@ -1,4 +1,5 @@
 var userModule = require('../modules/usersModule');
+// var User = require('../models/User');
 
 const userCtrlSignin = (req, res) => {
   // res.send('signin頁');

@@ -2,6 +2,17 @@
   <div class="login-page">
     <!-- <div class="login-title"></div> -->
     <div class="login-item">
+      <div class="login-username">
+        <label>暱稱</label>
+        <input
+          type="userName"
+          name="userName"
+          v-model="userName"
+          size="25px"
+          rules="usernameRules"
+          placeholder="UserName"
+        />
+      </div>
       <div class="login-name">
         <label>姓名</label>
         <input
@@ -9,12 +20,19 @@
           name="Name"
           v-model="Name"
           size="25px"
-          rules="usernameRules"
+          rules="nameRules"
+          placeholder="Name"
         />
       </div>
       <div class="login-account">
         <label>帳號</label>
-        <input type="email" name="email" v-model="email" size="25px" />
+        <input
+          type="email"
+          name="email"
+          v-model="email"
+          size="25px"
+          placeholder="Email"
+        />
       </div>
       <div class="login-password">
         <label>密碼</label>
@@ -24,6 +42,7 @@
           v-model="password"
           size="25px"
           rules="usernameRules"
+          placeholder="Password"
         />
       </div>
 
@@ -50,8 +69,8 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data() {
     return {
-      email: 'abc',
-      password: '123',
+      email: '',
+      password: '',
     };
   },
 
@@ -80,7 +99,7 @@ export default {
   width: 400px;
   height: 800px;
   margin: 80px auto;
-  max-height: 500px;
+  max-height: 550px;
   border-radius: 10px;
   box-shadow: 0px 0px 3px #eeeeee;
 }
@@ -90,7 +109,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  top: 500px;
+  top: 550px;
 }
 
 /* .login-page .login-title {
@@ -117,13 +136,23 @@ export default {
 .login-page .login-test .login-item {
   margin: 2px;
 }
-
-.login-page .login-test .login-item .login-account {
+.login-username {
   margin-top: 15px;
+  margin: 10px;
+}
+.login-name {
+  margin-top: 15px;
+  margin: 10px;
 }
 
-.login-page .login-test .login-item .login-password {
+.login-account {
   margin-top: 15px;
+  margin: 10px;
+}
+
+.login-password {
+  margin-top: 15px;
+  margin: 10px;
 }
 
 .login-page .login-test .login-item Button {
@@ -133,15 +162,7 @@ export default {
 .login-page .login-test .login-footer a {
   font-size: 15px;
 }
-.login-account {
-  margin: 10px;
-}
-.login-password {
-  margin: 10px;
-}
-.login-name {
-  margin: 10px;
-}
+
 .login-item label {
   /* font-weight: bold; */
   font-family: 'Noto Serif TC', Sans-serif;

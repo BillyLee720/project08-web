@@ -4,7 +4,13 @@
     <div class="login-item">
       <div class="login-account">
         <label>帳號</label>
-        <input type="email" name="email" v-model="email" size="25px" />
+        <input
+          type="email"
+          name="email"
+          v-model="email"
+          size="25px"
+          placeholder="Email"
+        />
       </div>
       <div class="login-password">
         <label>密碼</label>
@@ -14,6 +20,7 @@
           v-model="password"
           size="25px"
           rules="usernameRules"
+          placeholder="Password"
         />
       </div>
       <div class="submit-button">
@@ -40,8 +47,8 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data() {
     return {
-      email: 'abc',
-      password: '123',
+      email: '',
+      password: '',
     };
   },
 

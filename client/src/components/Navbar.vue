@@ -19,7 +19,7 @@
         <router-link to="/"><span>商城</span></router-link>
       </li>
       <li>
-        <router-link to="/"><span>計算機</span></router-link>
+        <router-link to="/Calculator"><span>計算機</span></router-link>
       </li>
       <li>
         <router-link to="/"><span>APP</span></router-link>

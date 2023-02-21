@@ -6,7 +6,7 @@ import Login from '../components/Login/Login.vue';
 import Register from '../components/Login/Register.vue';
 import ForgetPassword from '../components/Login/ForgetPassword.vue';
 import Captcha from '../components/Login/Captcha.vue';
-import Test from '../views/test.vue';
+import Calculator from '../views/CalculatorView.vue';
 
 const routes = [
   {
@@ -47,9 +47,9 @@ const routes = [
     ],
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: Test,
+    path: '/Calculator',
+    name: 'Calculator',
+    component: Calculator,
   },
 ];
 
