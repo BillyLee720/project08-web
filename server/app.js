@@ -3,10 +3,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const { sequelize } = require('./models');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/api/users');
+const sequelize = require('./models/index');
 
 var app = express();
 
@@ -44,7 +44,9 @@ app.use(
   })
 );
 sequelize.sync().then(() => {
-  app.listen(process.env.PORT || 8081);
+  app.listen(process.env.PORT || 8081, () => {
+    console.log(`Server running on port ${process.env.PORT || 8081}`);
+  });
 });
 
 module.exports = app;

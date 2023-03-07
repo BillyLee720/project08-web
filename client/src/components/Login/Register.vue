@@ -71,6 +71,8 @@ export default {
     return {
       email: '',
       password: '',
+      userName: '',
+      // name: '',
     };
   },
 
@@ -80,10 +82,12 @@ export default {
         const response = await AuthenticationService.register({
           email: this.email,
           password: this.password,
+          username: this.userName,
+          // error: null,
         });
         console.log(response.data);
       } catch (error) {
-        console.log(error);
+        // this.error = error.response.data.error;
       }
     },
   },

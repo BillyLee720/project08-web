@@ -1,27 +1,21 @@
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize');
-const config = require('../config/config');
-const db = {};
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize('gym', 'postgres', '0000', {
+  host: 'localhost',
+  dialect: 'postgres',
+  dialectOptions: {
+    // ssl: process.env.DATABASE_URL ? true : false,
+    pool: {
+      max: 5, // 最大连接数
+      min: 0, // 最小连接数
+      acquire: 30000, // 连接超时时间（ms）
+      idle: 10000, // 连接空闲时间（ms）
+    },
+  },
+  define: {
+    freezeTableName: true,
+  },
+});
 
-const sequelize = new Sequelize(
-  config.db.database,
-  config.db.user,
-  config.db.password,
-  config.db.options
-);
-
-fs.readdirSync(__dirname)
-  .filter((file) => file !== 'index.js')
-  .forEach((file) => {
-    // const model = sequelize.import(path.join(__dirname, file));
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      Sequelize.DataTypes
-    );
-    db[model.name] = model;
-  });
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-module.exports = db;
+module.exports = sequelize;

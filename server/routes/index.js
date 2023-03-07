@@ -3,6 +3,7 @@
 // var users = require('./api/users');
 // const pool = require('../util/database');
 const AuthenticationController = require('../controllers/AuthenticationController');
+const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy');
 
 // /* GET home page. */
 // router.get('/', function (req, res, next) {
@@ -11,7 +12,11 @@ const AuthenticationController = require('../controllers/AuthenticationControlle
 
 // // router.route('/login');
 module.exports = (app) => {
-  app.post('/register', AuthenticationController.register);
+  app.post(
+    '/register',
+    AuthenticationControllerPolicy.register,
+    AuthenticationController.register
+  );
 };
 // // router.use('/users', users);
 
