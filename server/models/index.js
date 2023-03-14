@@ -16,6 +16,9 @@ const sequelize = new Sequelize('gym', 'postgres', '0000', {
   define: {
     freezeTableName: true,
   },
+  // authentication: {
+  //   jwtSecret: process.env.JWT_SECRET || 'secret',
+  // },
 });
 
 module.exports = sequelize;

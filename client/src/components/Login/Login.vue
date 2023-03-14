@@ -49,19 +49,19 @@ export default {
     return {
       email: '',
       password: '',
+      error: null,
     };
   },
 
   methods: {
-    async register() {
+    async login() {
       try {
-        const response = await AuthenticationService.register({
+        await AuthenticationService.login({
           email: this.email,
           password: this.password,
         });
-        console.log(response.data);
       } catch (error) {
-        console.log(error);
+        this.error = error.response.data.error;
       }
     },
   },

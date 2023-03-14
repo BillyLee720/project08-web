@@ -4,4 +4,7 @@ export default {
   register(credentials) {
     return Api().post('register', credentials);
   },
+  register(credentials) {
+    return Api().post('login', credentials);
+  },
 };

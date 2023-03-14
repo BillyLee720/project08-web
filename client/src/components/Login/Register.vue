@@ -1,6 +1,7 @@
 <template>
   <div class="login-page">
     <!-- <div class="login-title"></div> -->
+
     <div class="login-item">
       <div class="login-username">
         <label>暱稱</label>
@@ -61,6 +62,7 @@
           <p><a href="/LoginView/forgetPassword">忘記密碼</a></p>
         </div>
       </div> -->
+    <div class="error" v-html="error" />
   </div>
 </template>
 
@@ -72,6 +74,7 @@ export default {
       email: '',
       password: '',
       userName: '',
+      error: null,
       // name: '',
     };
   },
@@ -79,7 +82,7 @@ export default {
   methods: {
     async register() {
       try {
-        const response = await AuthenticationService.register({
+        await AuthenticationService.register({
           email: this.email,
           password: this.password,
           username: this.userName,
@@ -87,7 +90,7 @@ export default {
         });
         console.log(response.data);
       } catch (error) {
-        // this.error = error.response.data.error;
+        this.error = error.response.data.error;
       }
     },
   },
