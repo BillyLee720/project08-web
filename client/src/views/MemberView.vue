@@ -1,201 +1,195 @@
 <template>
 
-  <div class="member-nav">
-    <nav role="navigation">
-        <div id="menuToggle">
-            <input type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-                <a href="#"><li>首頁</li></a>
-                <a href="#"><li>About</li></a>
-                <a href="#"><li>Info</li></a>
-                <a href="#"><li>Contact</li></a>
-            </ul>
-        </div>
-    </nav>
-    <div class="navbar-logo" click>
-      <router-link to="/">High-Fitness</router-link>
+ 
+    <div class="dashboard">
+      <ul class="nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" href="#">個人資料</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">選項2</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">選項3</a>
+            </li>
+            
+          </ul> 
+        <section class="dashboard-in">
+          <form class="form">
+            <h3>個人資料</h3>
+            <div class="form-center">
+              <div class="form-row">
+                <label for="name" class="form-label">姓名</label>
+                <input type="text" class="form-input">
+              </div>
+              <div class="form-row">
+                <label for="birth" class="form-label">生日</label>
+                <input type="date" class="form-input-date" value="2000-01-01" >
+              </div>
+              <div class="form-row">
+                <label for="mail" class="form-label">E-mail</label>
+                <input type="text" class="form-input">
+              </div>
+              <div class="form-row">
+                <label for="password" class="form-label">密碼</label>
+                <input type="text" class="form-input">
+              </div>
+              <div class="form-row">
+                <label for="phone" class="form-label">電話</label>
+                <input type="text" class="form-input">
+              </div>
+              <div class="form-row">
+                <label for="height" class="form-label">身高</label>
+                <input type="text" class="form-input">
+              </div>
+              <div class="form-row">
+                <label for="gender" class="form-label">性別</label>
+                <select class="form-input-gender">
+                  <option>男</option>
+                  <option>女</option>
+                </select>
+              </div>
+              
+              <button class="btn">儲存</button>
+            </div>
+            
+          </form>
+        </section>
     </div>
-    <div class="btn-container" >
-        <button @click="isAdmin = !isAdmin">
-            <a href="#">第8組</a>
-            <img src="../assets/211614_down_b_arrow_icon.svg" alt="" srcset="" >
-        </button>
-        <div class="drop-down"  v-show="isAdmin">
-            <button>
-                <a href="">Logout</a>
-            </button>
-        </div>
-    </div>
-  </div>
-    
 
 
 </template>
 
 <script>
+
+
 export default {
-  data() {
-    return {
-      isAdmin: false,
-      
-    };
-   }
- }
+  name: 'MemberPage'
+};
 </script>
 
 
+
 <style>
-#menuToggle{
-  display: block;
-  position: relative;
-  top: 25px;
-  left: 50px;
-  z-index: 1;
-  -webkit-user-select: none;
-  user-select: none;
+
+.dashboard {
+  margin: 50px 300px;
+  border-radius: 5px;
+  background: #ffffffad;
 }
 
-#menuToggle a{
-  text-decoration: none;
-  color: #232323;
-  transition: color 0.3s ease;
-   font-weight: bold;
+
+
+.dashboard  .nav-tabs {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    
 }
 
-#menuToggle a:hover{
-  color: tomato;
+.dashboard  .nav-tabs .nav-item{
+    display: inline;
+  
 }
 
-#menuToggle input{
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  cursor: pointer;
-  opacity: 0; 
-  z-index: 2;
-  -webkit-touch-callout: none;
+.dashboard  .nav-tabs .nav-item .nav-link{
+    color: black;
+    float: left;
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid black;
+    font-size: 16px;
+    background-color: #ffffffad;
+    border-radius: 5px;
+    font-weight: bold;
+    
 }
 
-#menuToggle span{
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background: #cdcdcd;
-  border-radius: 3px;
-  z-index: 1;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
+.dashboard  .nav-tabs .nav-item .nav-link:hover{
+    
+    background-color: rgb(97, 95, 95);
+    
 }
 
-#menuToggle span:first-child{
-  transform-origin: 0% 0%;
-}
-
-#menuToggle span:nth-last-child(2){
-  transform-origin: 0% 100%;
-}
-
-#menuToggle input:checked ~ span{
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #23232398;
-}
-
-#menuToggle input:checked ~ span:nth-last-child(3){
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-#menuToggle input:checked ~ span:nth-last-child(2){
-  transform: rotate(-45deg) translate(0, -1px);
-}
-
-#menu{
-  position: absolute;
-  width: 200px;
-  height: 100vh;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 125px;
-  background: #ededed;
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-
-#menu li{
-  padding: 10px 0;
-  font-size: 22px;
-}
-
-#menuToggle input:checked ~ ul{
-  transform: none;
-}
-
-.member-nav {
-    display: flex;
-    justify-content: space-between;
-    background-color: #393e46;
-    padding: 20px 0px;
-}
-.navbar-logo {
-  text-align:center;
-  padding-bottom: 20px;
-  padding-top: 10px;
-}
-
-.navbar-logo a {
-  color: #ffd369;
-  font-weight: bold;
-  font-size: 2.5rem;
-  font-family: 'Babylonica', cursive;
-  text-shadow: 0.5px 1px 0.2em #eeeeee73;
-}
-
-.btn-container {
-  padding-top: 20px;  
-  text-align: right;
-  padding-right: 20px;
-  }
-
-.btn-container button {
-   border: none;
-  padding: 5px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  border-radius: 10px;
-  font-weight: bold;
-
-}
-
-.btn-container button:hover {
- background-color: rgb(196, 248, 185);
-    transform: scale(1.05);
-    transition: 0.2s;
-
-}
-
-.btn-container button a{
-   padding-bottom: 10px;
-   color: #000;
+.dashboard .dashboard-in {
+    width: 100%;
+    padding: 0px 20px 20px;
+    box-sizing: border-box;
    
 }
 
+.dashboard .dashboard-in .form h3 {
+  font-size: 30px;
+}
 
-.btn-container .drop-down{
-  padding-top: 15px;
+.dashboard .dashboard-in .form .form-center {
+  grid-template-columns: 1fr 1fr ;
+    align-items: center;
+    column-gap: 1rem;
+    display: grid;
+    row-gap: 0.5rem;
+}
+
+.dashboard .dashboard-in .form .form-center .form-row{
+  margin-bottom: 10px;
+
+}
+
+.dashboard .dashboard-in .form .form-center .form-row .form-label{
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 20px;
+  
+}
+
+.dashboard .dashboard-in .form .form-center .form-row .form-input{
+  width: 100%;
+    border: 1px solid var(--grey-200);
+    font-size: 100%;
+    height: 30px;
+    border-radius: 5px;
+   padding-left: 10px;
+}
+
+.dashboard .dashboard-in .form .form-center .form-row .form-input-date{
+  width: 100%;
+    border: 1px solid var(--grey-200);
+    font-size: 100%;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+   
+}
+
+.dashboard .dashboard-in .form .form-center .form-row .form-input-gender{
+  width: 100%;
+    border: 1px solid var(--grey-200);
+    font-size: 100%;
+    height: 35px;
+    border-radius: 5px;
+   padding-left: 10px;
+}
+
+.dashboard .dashboard-in .form .form-center .btn{
+    border: none;
+    
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+    height: 35px;
+
+}
+
+
+.dashboard .dashboard-in .form .form-center .btn:hover {
+  background-color: rgb(196, 248, 185);
+  transform: scale(1.00);
+  transition: 0.2s;
 }
 </style>

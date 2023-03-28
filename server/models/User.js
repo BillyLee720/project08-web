@@ -1,26 +1,37 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
 const Promise = require('bluebird');
-const bcrypt = require('bcryptjs');
+const CryptoJS = require('crypto-js');
 
 async function hashPassword(user, options) {
-  const SALT_FACTOR = 8;
-
-  // console.log(hashPassword);
+  const secretKey = 'TestGym';
   if (typeof user.password !== 'string') {
     return Promise.reject(new Error('Invalid password'));
   }
-
   if (user.changed('password')) {
-    const salt = await bcrypt.genSalt(SALT_FACTOR);
-    const hash = await bcrypt.hash(user.password, salt);
-    user.password = hash;
+    const ciphertext = await CryptoJS.AES.encrypt(user.password, secretKey);
+    user.password = ciphertext.toString();
   } else {
     return;
   }
-  console.log(user.password);
+  console.log('user.password:', user.password);
 }
 
+function decryptPassword(ciphertext) {
+  const secretKey = 'TestGym';
+  const bytes = CryptoJS.AES.decrypt(ciphertext, secretKey);
+  const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+  return originalPassword;
+}
+
+function comparePassword(password, hashedPassword) {
+  const originalPassword = decryptPassword(hashedPassword);
+  console.log('password:', password);
+  console.log('hashed password:', hashedPassword);
+  console.log('originPassword:', originalPassword);
+  const isMatch = password === originalPassword;
+  return isMatch;
+}
 const User = sequelize.define(
   'user',
   {
@@ -50,18 +61,11 @@ const User = sequelize.define(
         }
         return hashPassword(user, options);
       },
-      beforeUpdate: hashPassword,
-      beforeSave: hashPassword,
     },
   }
 );
 
 User.prototype.comparePassword = async function (password) {
-  console.log('comparePassword function called');
-  console.log('password:', password);
-  console.log('hashed password:', this.password);
-  const isMatch = await bcrypt.compare(password, this.password);
-  console.log('isMatch:', isMatch);
-  return isMatch;
+  return comparePassword(password, this.password);
 };
 module.exports = { User };

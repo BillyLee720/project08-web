@@ -7,6 +7,7 @@ import Register from '../components/Login/Register.vue';
 import ForgetPassword from '../components/Login/ForgetPassword.vue';
 import Captcha from '../components/Login/Captcha.vue';
 import Calculator from '../views/CalculatorView.vue';
+import MemberView from '@/views/MemberView.vue';
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/Calculator',
     name: 'Calculator',
     component: Calculator,
+  },
+  {
+    path: '/Member',
+    name: 'MemberView',
+    component: MemberView,
   },
 ];
 

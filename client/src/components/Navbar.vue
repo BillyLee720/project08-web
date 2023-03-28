@@ -24,8 +24,14 @@
       <li>
         <router-link to="/"><span>APP</span></router-link>
       </li>
-      <li>
+      <li v-if="!$store.state.isUserLoggedIn">
         <router-link to="/login"><span>登入</span></router-link>
+      </li>
+      <li v-if="$store.state.isUserLoggedIn">
+        <router-link to="/member"><span>會員資料</span></router-link>
+      </li>
+      <li v-if="$store.state.isUserLoggedIn">
+        <router-link to="/" @click="logout"><span>登出</span></router-link>
       </li>
     </ul>
   </header>
@@ -34,6 +40,15 @@
 <script>
 export default {
   name: 'Navbar',
+  methods: {
+    logout() {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setUser', null);
+      this.$router.push({
+        name: 'Home',
+      });
+    },
+  },
 };
 </script>
 
