@@ -7,4 +7,10 @@ export default {
   login(credentials) {
     return Api().post('login', credentials);
   },
+  getUser() {
+    return Api().get('api/user');
+  },
+  updateUser(userData) {
+    return Api().put('/api/user', userData);
+  },
 };

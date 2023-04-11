@@ -53,4 +53,35 @@ module.exports = {
       });
     }
   },
+  async getUser(req, res) {
+    try {
+      const userId = req.params.id;
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return res.status(404).send({
+          error: 'User not found',
+        });
+      }
+      res.send(user.toJSON());
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOne({ where: { id: req.user.id } });
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      user.username = req.body.username;
+      user.email = req.body.email;
+      user.password = req.body.password;
+      user.phone = req.body.phone;
+      user.hight = req.body.height;
+      await user.save();
+      res.send(user);
+    } catch (err) {
+      console.log(error);
+    }
+  },
 };
