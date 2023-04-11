@@ -7,12 +7,11 @@ const Food = sequelize.define('food', {
     type: DataTypes.INTEGER,
     autoIncrement: false,
   },
-  email: {
+  date: {
     type: DataTypes.STRING,
-    unique: true,
   },
-  password: DataTypes.STRING,
-  username: {
+  time: DataTypes.STRING,
+  fid: {
     type: DataTypes.STRING,
   },
   birth: DataTypes.STRING,

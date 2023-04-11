@@ -8,6 +8,8 @@ import ForgetPassword from '../components/Login/ForgetPassword.vue';
 import Captcha from '../components/Login/Captcha.vue';
 import Calculator from '../views/CalculatorView.vue';
 import MemberView from '@/views/MemberView.vue';
+import ShopView from '../views/ShopView.vue';
+import ErrorView from '../views/ErrorView.vue';
 
 const routes = [
   {
@@ -56,6 +58,16 @@ const routes = [
     path: '/Member',
     name: 'MemberView',
     component: MemberView,
+  },
+  {
+    path: '/Shop',
+    name: 'ShopView',
+    component: ShopView,
+  },
+  {
+    path: '/Error',
+    name: 'ErrorView',
+    component: ErrorView,
   },
 ];
 

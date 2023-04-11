@@ -9,8 +9,6 @@ var usersRouter = require('./routes/api/users');
 const sequelize = require('./models/index');
 
 var app = express();
-
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

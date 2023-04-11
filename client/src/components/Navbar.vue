@@ -16,7 +16,7 @@
         <router-link to="/about"><span>關於</span></router-link>
       </li>
       <li>
-        <router-link to="/"><span>商城</span></router-link>
+        <router-link to="/Shop"><span>商城</span></router-link>
       </li>
       <li>
         <router-link to="/Calculator"><span>計算機</span></router-link>
