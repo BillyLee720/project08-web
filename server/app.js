@@ -5,20 +5,23 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/api/users');
 const sequelize = require('./models/index');
 
 var app = express();
-
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Replace with the domain of your client application
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 app.use('/api', indexRouter);
-app.use('/users', usersRouter);
 
 require('./routes/index')(app);
 app.use(
