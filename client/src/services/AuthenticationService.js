@@ -11,6 +11,6 @@ export default {
     return Api().get('api/user');
   },
   updateUser(userData) {
-    return Api().put('/api/user', userData);
+    return Api().patch('/user', userData);
   },
 };

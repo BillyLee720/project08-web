@@ -1,4 +1,4 @@
-const { User } = require('../models/User');
+const { User, hashPassword } = require('../models/User');
 const jwt = require('jsonwebtoken');
 const sequelize = require('../models/index');
 
@@ -69,15 +69,14 @@ module.exports = {
   },
   async updateUser(req, res) {
     try {
-      const { email } = req.body;
+      const { email, username, phone, height, password } = req.body;
+      console.log(req.body);
       const user = await User.findOne({ where: { email: email } });
-      if (!user) {
-        return res.status(404).send('User not found');
-      }
-      user.username = req.body.username;
-      user.password = req.body.password;
-      user.phone = req.body.phone;
-      user.height = req.body.height;
+      user.username = username;
+      user.phone = phone;
+      user.height = height;
+      user.password = password;
+      await hashPassword(user);
       await user.save();
       res.send(user);
     } catch (err) {

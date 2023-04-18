@@ -18,31 +18,68 @@
           <div class="form-center">
             <div class="form-row">
               <label for="name" class="form-label">姓名</label>
-              <input type="text" class="form-input" v-model="user.username" />
+              <input
+                type="text"
+                class="form-input"
+                v-model="user.username"
+                :disabled="disabled"
+              />
             </div>
             <div class="form-row">
               <label for="birth" class="form-label">生日</label>
-              <input type="date" class="form-input-date" value="2000-01-01" />
+              <input
+                type="date"
+                class="form-input-date"
+                value="2000-01-01"
+                :disabled="disabled"
+              />
             </div>
             <div class="form-row">
               <label for="mail" class="form-label">email</label>
-              <input type="text" class="form-input" v-model="user.email" />
+              <input
+                type="text"
+                class="form-input"
+                v-model="user.email"
+                readonly
+                disabled
+              />
             </div>
             <div class="form-row">
-              <label for="password" class="form-label">密碼</label>
-              <input type="text" class="form-input" v-model="user.password" />
+              <label
+                for="password"
+                class="form-label"
+                v-bind:readonly="isReadOnly"
+                >密碼</label
+              >
+              <input
+                type="password"
+                class="form-input"
+                v-model="user.password"
+                :disabled="disabled"
+              />
             </div>
             <div class="form-row">
               <label for="phone" class="form-label">手機</label>
-              <input type="text" class="form-input" v-model="user.phone" />
+              <input
+                type="text"
+                class="form-input"
+                v-model="user.phone"
+                v-bind:readonly="isReadOnly"
+                :disabled="disabled"
+              />
             </div>
             <div class="form-row">
               <label for="height" class="form-label">身高(cm)</label>
-              <input type="text" class="form-input" />
+              <input
+                type="text"
+                class="form-input"
+                v-bind:readonly="isReadOnly"
+                :disabled="disabled"
+              />
             </div>
             <div class="form-row">
               <label for="gender" class="form-label">性別</label>
-              <select class="form-input-gender" disabled>
+              <select class="form-input-gender" :disabled="disabled">
                 <option>男</option>
                 <option>女</option>
               </select>
@@ -63,31 +100,37 @@
 import { mapActions, mapState } from 'vuex';
 import axios from 'axios';
 
+import AuthenticationService from '@/services/AuthenticationService';
+
 export default {
   name: 'MemberPage',
   data() {
     return {
-      isReadOnly: true,
-      modifindUser: {
-        username: '',
-        email: '',
-        phone: '',
-        password: '',
-        height: '',
-      },
+      disabled: false,
     };
   },
   computed: mapState(['user']),
   methods: {
     toggleChange() {
       this.isReadOnly = !this.isReadOnly;
-      this.modifindUser = { ...this.user };
+      this.disabled = false;
     },
-    ...mapActions(['saveUserData']),
     async SaveChanges() {
-      await this.$store.dispatch('updateUser', this.modifindUser);
-      console.log(this.modifindUser);
-      this.isReadOnly = true;
+      try {
+        const response = await AuthenticationService.updateUser({
+          email: this.email,
+          password: this.password,
+          username: this.username,
+          phone: this.phone,
+          height: this.height,
+        });
+        console.log(response);
+        // this.$store.dispatch('updateUser', response.data.userData);
+        console.log('User updated successfully!');
+        this.disabled = true;
+      } catch (error) {
+        console.error('Failed to update user:', error);
+      }
     },
   },
 };

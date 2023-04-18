@@ -68,4 +68,4 @@ const User = sequelize.define(
 User.prototype.comparePassword = async function (password) {
   return comparePassword(password, this.password);
 };
-module.exports = { User };
+module.exports = { User, hashPassword };

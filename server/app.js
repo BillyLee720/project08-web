@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Replace with the domain of your client application
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // 將此處替換為您的客戶端應用程式的域名
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
