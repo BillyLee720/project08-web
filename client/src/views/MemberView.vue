@@ -13,7 +13,7 @@
         </li>
       </ul>
       <section class="dashboard-in">
-        <form class="form">
+        <div class="form-div">
           <h3>個人資料</h3>
           <div class="form-center">
             <div class="form-row">
@@ -52,7 +52,7 @@
                 >密碼</label
               >
               <input
-                type="password"
+                type="text"
                 class="form-input"
                 v-model="user.password"
                 :disabled="disabled"
@@ -90,7 +90,7 @@
             <button class="btn" @click="toggleCancel">取消</button>
             <!-- </div> -->
           </div>
-        </form>
+        </div>
       </section>
     </div>
   </div>
@@ -106,8 +106,16 @@ export default {
   name: 'MemberPage',
   data() {
     return {
+      email: '',
+      password: '',
+      username: '',
+      phone: '',
+      height: '',
       disabled: false,
     };
+  },
+  created() {
+    this.originalUser = JSON.parse(JSON.stringify(this.user));
   },
   computed: mapState(['user']),
   methods: {
@@ -118,11 +126,11 @@ export default {
     async SaveChanges() {
       try {
         const response = await AuthenticationService.updateUser({
-          email: this.email,
-          password: this.password,
-          username: this.username,
-          phone: this.phone,
-          height: this.height,
+          email: this.user.email,
+          password: this.user.password,
+          username: this.user.username,
+          phone: this.user.phone,
+          height: this.user.height,
         });
         console.log(response);
         // this.$store.dispatch('updateUser', response.data.userData);
@@ -131,6 +139,11 @@ export default {
       } catch (error) {
         console.error('Failed to update user:', error);
       }
+    },
+    toggleCancel() {
+      this.user = JSON.parse(JSON.stringify(this.originalUser));
+      this.disabled = true;
+      this.isReadOnly = true;
     },
   },
 };
@@ -179,11 +192,11 @@ export default {
   box-sizing: border-box;
 }
 
-.dashboard .dashboard-in .form h3 {
+.dashboard .dashboard-in .form-div h3 {
   font-size: 30px;
 }
 
-.dashboard .dashboard-in .form .form-center {
+.dashboard .dashboard-in .form-div .form-center {
   grid-template-columns: 1fr;
   align-items: center;
   column-gap: 1rem;
@@ -191,18 +204,18 @@ export default {
   row-gap: 0.5rem;
 }
 
-.dashboard .dashboard-in .form .form-center .form-row {
+.dashboard .dashboard-in .form-div .form-center .form-row {
   margin-bottom: 10px;
 }
 
-.dashboard .dashboard-in .form .form-center .form-row .form-label {
+.dashboard .dashboard-in .form-div .form-center .form-row .form-label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
   font-size: 20px;
 }
 
-.dashboard .dashboard-in .form .form-center .form-row .form-input {
+.dashboard .dashboard-in .form-div .form-center .form-row .form-input {
   width: 100%;
   border: 1px solid var(--grey-200);
   font-size: 100%;
@@ -211,7 +224,7 @@ export default {
   padding-left: 10px;
 }
 
-.dashboard .dashboard-in .form .form-center .form-row .form-input-date {
+.dashboard .dashboard-in .form-div .form-center .form-row .form-input-date {
   width: 100%;
   border: 1px solid var(--grey-200);
   font-size: 100%;
@@ -220,7 +233,7 @@ export default {
   padding-left: 10px;
 }
 
-.dashboard .dashboard-in .form .form-center .form-row .form-input-gender {
+.dashboard .dashboard-in .form-div .form-center .form-row .form-input-gender {
   width: 100%;
   border: 1px solid var(--grey-200);
   font-size: 100%;
@@ -229,7 +242,7 @@ export default {
   padding-left: 10px;
 }
 
-.dashboard .dashboard-in .form .form-center .btn {
+.dashboard .dashboard-in .form-div .form-center .btn {
   border: none;
 
   text-align: center;
@@ -242,7 +255,7 @@ export default {
   height: 35px;
 }
 
-.dashboard .dashboard-in .form .form-center .btn:hover {
+.dashboard .dashboard-in .form-div .form-center .btn:hover {
   background-color: rgb(196, 248, 185);
   transform: scale(1);
   transition: 0.2s;

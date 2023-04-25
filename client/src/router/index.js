@@ -4,7 +4,7 @@ import AboutView from '../views/AboutView.vue';
 import LoginView from '../views/LoginView.vue';
 import Login from '../components/Login/Login.vue';
 import Register from '../components/Login/Register.vue';
-import ForgetPassword from '../components/Login/ForgetPassword.vue';
+import ForgetPassword from '../components/Login/ForgetpasswordView.vue';
 import Captcha from '../components/Login/Captcha.vue';
 import Calculator from '../views/CalculatorView.vue';
 import MemberView from '@/views/MemberView.vue';
@@ -38,11 +38,6 @@ const routes = [
     component: LoginView,
     children: [
       {
-        path: 'forgetPassword',
-        name: 'ForgetPassword',
-        component: ForgetPassword,
-      },
-      {
         path: 'captcha',
         name: 'Captcha',
         component: Captcha,
@@ -68,6 +63,11 @@ const routes = [
     path: '/Error',
     name: 'ErrorView',
     component: ErrorView,
+  },
+  {
+    path: '/forgetPassword',
+    name: 'ForgetPassword',
+    component: ForgetPassword,
   },
 ];
 

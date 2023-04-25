@@ -2,17 +2,19 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
 
 const Weight = sequelize.define('weight&height', {
-  userid: {
+  wid: {
+    primaryKey: true,
     type: DataTypes.INTEGER,
     autoIncrement: false,
   },
-  wid: {
-    type: DataTypes.STRING,
-    primaryKey: true,
+  userid: {
+    type: DataTypes.INTEGER,
   },
+  weight: DataTypes.DOUBLE,
+  unit: DataTypes.STRING,
   date: {
     type: DataTypes.STRING,
   },
 });
 
-module.exports = { Food };
+module.exports = { Weight };

@@ -2,21 +2,22 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
 
 const Food = sequelize.define('food', {
-  userid: {
+  nid: {
     primaryKey: true,
     type: DataTypes.INTEGER,
     autoIncrement: false,
   },
-  date: {
-    type: DataTypes.STRING,
-  },
-  time: DataTypes.STRING,
   fid: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
-  birth: DataTypes.STRING,
-  gender: DataTypes.CHAR,
-  phone: DataTypes.STRING,
+  foodname: DataTypes.STRING,
+  calories: DataTypes.SMALLINT,
+  carbohydrate: DataTypes.SMALLINT,
+  fat: DataTypes.SMALLINT,
+  protein: DataTypes.SMALLINT,
+  perpack: DataTypes.SMALLINT,
+  size: DataTypes.INTEGER,
+  unit: DataTypes.STRING,
 });
 
 module.exports = { Food };

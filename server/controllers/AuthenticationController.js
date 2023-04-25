@@ -1,4 +1,4 @@
-const { User, hashPassword } = require('../models/User');
+const { User, hashPassword, decryptPassword } = require('../models/User');
 const jwt = require('jsonwebtoken');
 const sequelize = require('../models/index');
 
@@ -62,7 +62,11 @@ module.exports = {
           error: 'User not found',
         });
       }
-      res.send(user.toJSON());
+      const decryptedPassword = decryptPassword(user.password);
+      const userObj = user.toJSON();
+      delete userObj.password;
+      console.log(userObj);
+      res.send({ ...userObj, password: decryptedPassword });
     } catch (err) {
       console.log(err);
     }
@@ -70,7 +74,7 @@ module.exports = {
   async updateUser(req, res) {
     try {
       const { email, username, phone, height, password } = req.body;
-      console.log(req.body);
+      // console.log(email);
       const user = await User.findOne({ where: { email: email } });
       user.username = username;
       user.phone = phone;
