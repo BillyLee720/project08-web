@@ -4,12 +4,15 @@ const Promise = require('bluebird');
 const CryptoJS = require('crypto-js');
 
 async function hashPassword(user, options) {
-  const secretKey = 'TestGym';
+  // const secretKey = 'TestGym';
   if (typeof user.password !== 'string') {
     return Promise.reject(new Error('Invalid password'));
   }
   if (user.changed('password')) {
-    const ciphertext = await CryptoJS.AES.encrypt(user.password, secretKey);
+    const ciphertext = await CryptoJS.AES.encrypt(
+      user.password,
+      process.env.secretKey
+    );
     user.password = ciphertext.toString();
   } else {
     return;
@@ -18,8 +21,8 @@ async function hashPassword(user, options) {
 }
 
 function decryptPassword(ciphertext) {
-  const secretKey = 'TestGym';
-  const bytes = CryptoJS.AES.decrypt(ciphertext, secretKey);
+  // const secretKey = 'TestGym';
+  const bytes = CryptoJS.AES.decrypt(ciphertext, process.env.secretKey);
   const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
   return originalPassword;
 }

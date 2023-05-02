@@ -1,6 +1,7 @@
 <template>
   <div class="login-page">
     <!-- <div class="login-title"></div> -->
+    <div class="error-message" v-if="error">{{ error }}</div>
     <div class="login-item">
       <div class="login-account">
         <label>帳號</label>
@@ -65,6 +66,9 @@ export default {
         this.$router.push('/member');
       } catch (error) {
         this.error = error.response.data.error;
+        setTimeout(() => {
+          this.error = null;
+        }, 2500);
       }
     },
   },
@@ -182,5 +186,9 @@ export default {
 .login-foot a:hover {
   border-bottom: white 1px solid;
   transition: 0.2s;
+}
+.error-message {
+  color: rgb(253, 80, 80);
+  background: #393e46;
 }
 </style>
