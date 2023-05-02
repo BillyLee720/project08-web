@@ -1,12 +1,13 @@
 <template>
   <div class="member">
-    <div class="dashboard">
+    
+<div class="dashboard">
       <ul class="nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" href="#">個人資料</a>
+          <router-link to="#" class="nav-link">個人資料</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">選項2</a>
+           <router-link to="/record" class="nav-link">紀錄</router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">選項3</a>
@@ -93,7 +94,8 @@
         </div>
       </section>
     </div>
-  </div>
+    </div>
+
 </template>
 
 <script>
@@ -150,8 +152,14 @@ export default {
 </script>
 
 <style>
+
+
 .member {
-  padding: 50px 400px;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 500px;
+  margin: 50px auto 100px auto;
 }
 
 .dashboard {
@@ -197,9 +205,9 @@ export default {
 }
 
 .dashboard .dashboard-in .form-div .form-center {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  column-gap: 1rem;
+  column-gap: 2rem;
   display: grid;
   row-gap: 0.5rem;
 }
@@ -259,5 +267,123 @@ export default {
   background-color: rgb(196, 248, 185);
   transform: scale(1);
   transition: 0.2s;
+}
+
+@media (max-width:768px) {
+.member {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 900px;
+  margin: 50px auto 100px auto;
+}
+
+.dashboard {
+  border-radius: 5px;
+  background: #ffffffad;
+}
+
+.dashboard .nav-tabs {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard .nav-tabs .nav-item {
+  display: inline;
+}
+
+.dashboard .nav-tabs .nav-item .nav-link {
+  color: black;
+  float: left;
+  padding: 10px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid black;
+  font-size: 16px;
+  background-color: #ffffffad;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.dashboard .nav-tabs .nav-item .nav-link:hover {
+  background-color: rgb(97, 95, 95);
+}
+
+.dashboard .dashboard-in {
+  width: 100%;
+  padding: 0px 20px 20px;
+  box-sizing: border-box;
+}
+
+.dashboard .dashboard-in .form-div h3 {
+  font-size: 30px;
+}
+
+.dashboard .dashboard-in .form-div .form-center {
+  grid-template-columns: 1fr;
+  align-items: center;
+  column-gap: 2rem;
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.dashboard .dashboard-in .form-div .form-center .form-row {
+  margin-bottom: 10px;
+}
+
+.dashboard .dashboard-in .form-div .form-center .form-row .form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.dashboard .dashboard-in .form-div .form-center .form-row .form-input {
+  width: 100%;
+  border: 1px solid var(--grey-200);
+  font-size: 100%;
+  height: 30px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.dashboard .dashboard-in .form-div .form-center .form-row .form-input-date {
+  width: 100%;
+  border: 1px solid var(--grey-200);
+  font-size: 100%;
+  height: 30px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.dashboard .dashboard-in .form-div .form-center .form-row .form-input-gender {
+  width: 100%;
+  border: 1px solid var(--grey-200);
+  font-size: 100%;
+  height: 35px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.dashboard .dashboard-in .form-div .form-center .btn {
+  border: none;
+
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  height: 35px;
+}
+
+.dashboard .dashboard-in .form-div .form-center .btn:hover {
+  background-color: rgb(196, 248, 185);
+  transform: scale(1);
+  transition: 0.2s;
+}
+
 }
 </style>

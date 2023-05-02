@@ -398,4 +398,76 @@ export default {
   margin: 20px 20px;
   color: #eeeeee;
 }
+
+@media (max-width:768px) {
+  .main .section-second {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 600px;
+  padding: 0 50px;
+  margin: 50px 0;
+  flex-direction: column;
+}
+
+.main .section-second .second-widget {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 50%;
+  flex: 1 1 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #393e46;
+}
+
+.main .section-second .second-widget h3 {
+  margin: 20px 20px;
+  color: #eeeeee;
+}
+
+.section-fifth {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 600px;
+  padding: 0 50px;
+  margin: 50px 0;
+  flex-direction: column-reverse;
+}
+
+.section-fifth .fifth-widget {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 50%;
+  flex: 1 1 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #393e46;
+}
+
+.section-fifth .fifth-widget h3 {
+  margin: 20px 20px;
+  color: #eeeeee;
+}
+}
 </style>
