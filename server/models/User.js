@@ -2,6 +2,10 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
 const Promise = require('bluebird');
 const CryptoJS = require('crypto-js');
+const { Weight } = require('./Weight');
+const { Food } = require('./Food');
+const { FoodDate } = require('./FoodDate');
+const { RecordDate } = require('./RecordDate');
 
 async function hashPassword(user, options) {
   // const secretKey = 'TestGym';
@@ -67,6 +71,16 @@ const User = sequelize.define(
     },
   }
 );
+
+User.hasMany(FoodDate, {
+  foreignKey: 'userid',
+});
+User.hasMany(Weight, {
+  foreignKey: 'userid',
+});
+User.hasMany(RecordDate, {
+  foreignKey: 'userid',
+});
 
 User.prototype.comparePassword = async function (password) {
   return comparePassword(password, this.password);

@@ -1,8 +1,10 @@
 const { DataTypes } = require('sequelize');
+const { FoodDate } = require('./FoodDate');
 const sequelize = require('./index');
+const { RecordItem } = require('./recorditem');
 
 const Food = sequelize.define('food', {
-  nid: {
+  hid: {
     primaryKey: true,
     type: DataTypes.INTEGER,
     autoIncrement: false,
@@ -18,6 +20,9 @@ const Food = sequelize.define('food', {
   perpack: DataTypes.SMALLINT,
   size: DataTypes.INTEGER,
   unit: DataTypes.STRING,
+});
+Food.belongsTo(FoodDate, {
+  foreignKey: 'fid',
 });
 
 module.exports = { Food };

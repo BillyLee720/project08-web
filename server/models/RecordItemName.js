@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
+const { RecordItem } = require('./recorditem');
 
 const RecordItemName = sequelize.define('recorditemNamename', {
   lid: {
@@ -15,4 +16,7 @@ const RecordItemName = sequelize.define('recorditemNamename', {
   unit: DataTypes.STRING,
 });
 
+RecordItemName.belongsTo(RecordItem, {
+  foreignKey: 'nid',
+});
 module.exports = { RecordItemName };

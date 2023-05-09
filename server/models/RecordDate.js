@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
+const { RecordItem } = require('./recorditem');
+const User = require('./User');
 
 const RecordDate = sequelize.define('recorddate', {
   sid: {
@@ -11,4 +13,10 @@ const RecordDate = sequelize.define('recorddate', {
   date: DataTypes.DATE,
 });
 
+RecordDate.belongsTo(User, {
+  foreignKey: 'userid',
+});
+RecordDate.hasMany(RecordItem, {
+  foreignKey: 'sid',
+});
 module.exports = { RecordDate };

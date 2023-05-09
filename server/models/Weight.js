@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
+const { User } = require('./User');
 
-const Weight = sequelize.define('weight&height', {
+const Weight = sequelize.define('weight_height', {
   wid: {
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -16,5 +17,7 @@ const Weight = sequelize.define('weight&height', {
     type: DataTypes.STRING,
   },
 });
+
+Weight.belongsTo(User);
 
 module.exports = { Weight };
