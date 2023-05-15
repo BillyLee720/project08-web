@@ -39,62 +39,45 @@
 
 <script >
 import Chart from 'chart.js/auto';
+import axios from 'axios';
+
 export default {
+  // data() {
+  //   return {
+  //     selectedItem: '30天平均bmi',
+
+  //     items: [
+  //       { value: '1', imgSrc: '../assets/222.jpg', text: '30天平均bmi' },
+  //       { value: '2', imgSrc: '../assets/222.jpg', text: '項目二' },
+  //       { value: '3', imgSrc: '../assets/222.jpg', text: '項目三' },
+  //     ]
+  //   }
+  // },
+  
+
   data() {
     return {
-      selectedItem: '30天平均bmi',
-
-      items: [
-        { value: '1', imgSrc: '../assets/222.jpg', text: '30天平均bmi' },
-        { value: '2', imgSrc: '../assets/222.jpg', text: '項目二' },
-        { value: '3', imgSrc: '../assets/222.jpg', text: '項目三' },
-      ]
-    }
-  },
-
-  data1() {
-    return {
-      labels: [],
-      data: []
+      fetchedData: null,
     };
   },
-  mounted() {
-    this.generateChartData();
-    this.renderChart();
-  },
-  methods: {
-    generateChartData() {
-      this.labels = Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`);
-      this.data1 = Array.from({ length: 30 }, () => this.generateRandomBMI());
-    },
-    generateRandomBMI() {
-      return Math.floor(Math.random() * (30 - 18) + 18);
-    },
-    renderChart() {
-      const ctx = this.$refs.chart.getContext('2d');
 
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: this.labels,
-          datasets: [{
-            label: 'BMI',
-            data: this.data1,
-            backgroundColor: '#ffd369',
-            borderColor: '#ffd369',
-            borderWidth: 1,
-            
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-        },
-        
-      });
-    }
-  }
-}
+  mounted() {
+    this.fetchData();
+  },
+
+  methods: {
+    fetchData() {
+      axios.get('http://localhost:3000/data')
+        .then(response => {
+          this.fetchedData = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+  },
+};
+
 
 </script>
 

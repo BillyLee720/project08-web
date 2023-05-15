@@ -3,9 +3,9 @@ const sequelize = require('./index');
 const Promise = require('bluebird');
 const CryptoJS = require('crypto-js');
 const { Weight } = require('./Weight');
-const { Food } = require('./Food');
 const { FoodDate } = require('./FoodDate');
 const { RecordDate } = require('./RecordDate');
+// const { USER } = require('sequelize/types/index-hints');
 
 async function hashPassword(user, options) {
   // const secretKey = 'TestGym';
@@ -75,12 +75,15 @@ const User = sequelize.define(
 User.hasMany(FoodDate, {
   foreignKey: 'userid',
 });
-User.hasMany(Weight, {
-  foreignKey: 'userid',
-});
 User.hasMany(RecordDate, {
   foreignKey: 'userid',
 });
+Weight.belongsTo(RecordDate);
+
+User.hasMany(Weight, {
+  foreignKey: 'userid',
+});
+Weight.belongsTo(User);
 
 User.prototype.comparePassword = async function (password) {
   return comparePassword(password, this.password);
