@@ -13,10 +13,10 @@ const RecordItem = sequelize.define('recorditem', {
   item: DataTypes.STRING,
 });
 
-RecordItem.belongsTo(RecordDate, {
-  foreignKey: 'sid',
-});
-RecordItem.hasMany(RecordItemName, {
-  foreignKey: 'nid',
-});
+// RecordItem.belongsTo(RecordDate, {
+//   foreignKey: 'sid',
+// });
+// RecordItem.hasMany(RecordItemName, {
+//   foreignKey: 'nid',
+// });
 module.exports = { RecordItem };

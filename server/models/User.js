@@ -6,6 +6,8 @@ const { Weight } = require('./Weight');
 const { Food } = require('./Food');
 const { FoodDate } = require('./FoodDate');
 const { RecordDate } = require('./RecordDate');
+const { RecordItem } = require('./recorditem');
+const { RecordItemName } = require('./RecordItemName');
 
 async function hashPassword(user, options) {
   // const secretKey = 'TestGym';
@@ -71,16 +73,48 @@ const User = sequelize.define(
     },
   }
 );
-
+/* Food */
 User.hasMany(FoodDate, {
   foreignKey: 'userid',
 });
+FoodDate.belongsTo(User, {
+  foreignKey: 'userid',
+});
+FoodDate.hasMany(Food, {
+  foreignKey: 'fid',
+});
+Food.belongsTo(FoodDate, {
+  foreignKey: 'fid',
+});
+/* Weight */
 User.hasMany(Weight, {
   foreignKey: 'userid',
 });
+Weight.belongsTo(User, {
+  foreignKey: 'userid',
+});
+/* Record */
 User.hasMany(RecordDate, {
   foreignKey: 'userid',
 });
+RecordDate.belongsTo(User, {
+  foreignKey: 'userid',
+});
+RecordDate.hasMany(RecordItem, {
+  foreignKey: 'sid',
+});
+RecordItem.belongsTo(RecordDate, {
+  foreignKey: 'sid',
+});
+RecordDate.hasMany(RecordItemName, {
+  foreignKey: 'nid',
+});
+RecordItemName.belongsTo(RecordDate, {
+  foreignKey: 'nid',
+});
+// User.hasMany(RecordDate, {
+//   foreignKey: 'userid',
+// });
 
 User.prototype.comparePassword = async function (password) {
   return comparePassword(password, this.password);

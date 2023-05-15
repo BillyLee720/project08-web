@@ -16,7 +16,7 @@ const RecordItemName = sequelize.define('recorditemNamename', {
   unit: DataTypes.STRING,
 });
 
-RecordItemName.belongsTo(RecordItem, {
-  foreignKey: 'nid',
-});
+// RecordItemName.belongsTo(RecordItem, {
+//   foreignKey: 'nid',
+// });
 module.exports = { RecordItemName };

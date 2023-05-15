@@ -21,8 +21,8 @@ const Food = sequelize.define('food', {
   size: DataTypes.INTEGER,
   unit: DataTypes.STRING,
 });
-Food.belongsTo(FoodDate, {
-  foreignKey: 'fid',
-});
+// Food.belongsTo(FoodDate, {
+//   foreignKey: 'fid',
+// });
 
 module.exports = { Food };

@@ -14,10 +14,10 @@ const FoodDate = sequelize.define('fooddate', {
   time: DataTypes.TIME,
 });
 
-FoodDate.belongsTo(User, {
-  foreignKey: 'userid',
-});
-FoodDate.hasMany(Food, {
-  foreignKey: 'fid',
-});
+// FoodDate.belongsTo(User, {
+//   foreignKey: 'userid',
+// });
+// FoodDate.hasMany(Food, {
+//   foreignKey: 'fid',
+// });
 module.exports = { FoodDate };
