@@ -3,9 +3,9 @@ const sequelize = require('./index');
 const Promise = require('bluebird');
 const CryptoJS = require('crypto-js');
 const { Weight } = require('./Weight');
-const { Food } = require('./Food');
 const { FoodDate } = require('./FoodDate');
 const { RecordDate } = require('./RecordDate');
+
 const { RecordItem } = require('./recorditem');
 const { RecordItemName } = require('./RecordItemName');
 
@@ -112,9 +112,16 @@ RecordDate.hasMany(RecordItemName, {
 RecordItemName.belongsTo(RecordDate, {
   foreignKey: 'nid',
 });
-// User.hasMany(RecordDate, {
-//   foreignKey: 'userid',
-// });
+
+User.hasMany(RecordDate, {
+  foreignKey: 'userid',
+});
+Weight.belongsTo(RecordDate);
+
+User.hasMany(Weight, {
+  foreignKey: 'userid',
+});
+Weight.belongsTo(User);
 
 User.prototype.comparePassword = async function (password) {
   return comparePassword(password, this.password);
