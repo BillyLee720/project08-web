@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('./index');
 const { User } = require('./User');
 
-const Weight = sequelize.define('weight&height', {
+const Weight = sequelize.define('WeightHeight', {
   wid: {
     primaryKey: true,
     type: DataTypes.INTEGER,

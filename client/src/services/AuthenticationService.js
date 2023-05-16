@@ -13,4 +13,8 @@ export default {
   updateUser(userData) {
     return Api().patch('/user', userData);
   },
+  getWeightData(userId) {
+    return Api().get(`/user/${userId}/bmi`);
+  },
+  
 };

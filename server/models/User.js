@@ -5,7 +5,7 @@ const CryptoJS = require('crypto-js');
 const { Weight } = require('./Weight');
 const { FoodDate } = require('./FoodDate');
 const { RecordDate } = require('./RecordDate');
-
+const { Food } = require('./Food');
 const { RecordItem } = require('./recorditem');
 const { RecordItemName } = require('./RecordItemName');
 
@@ -106,22 +106,12 @@ RecordDate.hasMany(RecordItem, {
 RecordItem.belongsTo(RecordDate, {
   foreignKey: 'sid',
 });
-RecordDate.hasMany(RecordItemName, {
+RecordItem.hasMany(RecordItemName, {
   foreignKey: 'nid',
 });
-RecordItemName.belongsTo(RecordDate, {
+RecordItemName.belongsTo(RecordItem, {
   foreignKey: 'nid',
 });
-
-User.hasMany(RecordDate, {
-  foreignKey: 'userid',
-});
-Weight.belongsTo(RecordDate);
-
-User.hasMany(Weight, {
-  foreignKey: 'userid',
-});
-Weight.belongsTo(User);
 
 User.prototype.comparePassword = async function (password) {
   return comparePassword(password, this.password);

@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Index from '../views/index.vue';
 import AboutView from '../views/AboutView.vue';
-import LoginView from '../views/LoginView.vue';
 import Login from '../components/Login/Login.vue';
 import Register from '../components/Login/Register.vue';
 import ForgetPassword from '../components/Login/ForgetpasswordView.vue';
@@ -32,18 +31,6 @@ const routes = [
     path: '/register',
     name: 'register',
     component: Register,
-  },
-  {
-    path: '/loginView',
-    name: 'LoginView',
-    component: LoginView,
-    children: [
-      {
-        path: 'captcha',
-        name: 'Captcha',
-        component: Captcha,
-      },
-    ],
   },
   {
     path: '/Calculator',

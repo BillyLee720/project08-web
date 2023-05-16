@@ -2,6 +2,7 @@ var express = require('express');
 
 const AuthenticationController = require('../controllers/AuthenticationController');
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy');
+const RecordItemNameController = require('../controllers/RecordItemNameController');
 
 module.exports = (app) => {
   app.post(
@@ -12,5 +13,5 @@ module.exports = (app) => {
   app.post('/login', AuthenticationController.login);
   app.get('/user/:id', AuthenticationController.getUser);
   app.patch('/user', AuthenticationController.updateUser);
-  app.get('/user/:id', AuthenticationController.getData);
+  app.get('/user/:userId/bmi', RecordItemNameController.getData);
 };

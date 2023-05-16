@@ -40,6 +40,7 @@
 <script >
 import Chart from 'chart.js/auto';
 import axios from 'axios';
+import AuthenticationService from '@/services/AuthenticationService';
 
 export default {
   // data() {
@@ -54,27 +55,27 @@ export default {
   //   }
   // },
   
-
-  data() {
+data() {
     return {
-      fetchedData: null,
+     weightData:[],
+     fetchedData: null,
     };
   },
-
   mounted() {
     this.fetchData();
   },
-
   methods: {
     fetchData() {
-      axios.get('http://localhost:3000/data')
-        .then(response => {
-          this.fetchedData = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
+  const userId = '1'; // 替换为实际的用户 ID
+  AuthenticationService.getWeightData(userId)
+    .then(response => {
+      this.fetchedData = response.data.weight;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+},
+
   },
 };
 
