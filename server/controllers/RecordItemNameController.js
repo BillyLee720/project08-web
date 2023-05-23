@@ -4,7 +4,7 @@ const { Weight } = require('../models/Weight');
 module.exports = {
   async getData(req, res) {
     try {
-      const Id = req.body.userid;
+      const Id = req.params.id;
       console.log('userId:', Id); // 除錯訊息
       const user = await User.findByPk(Id);
       if (!user) {

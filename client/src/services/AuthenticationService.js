@@ -16,5 +16,4 @@ export default {
   getWeightData(userId) {
     return Api().get(`/user/${userId}/bmi`);
   },
-  
 };

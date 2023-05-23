@@ -49,5 +49,11 @@ export default createStore({
     clearData({ commit }) {
       commit('clearData');
     },
+    fetchUserData(context) {
+      const { user, token } = response;
+
+      context.commit('setUser', user);
+      context.commit('setToken', token);
+    },
   },
 });

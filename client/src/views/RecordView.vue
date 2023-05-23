@@ -17,27 +17,30 @@
           <div class="record-word">
             <h3>{{ selectedItem }}</h3>
           </div>
-          
+
           <div class="record-form-input">
-          <select v-model="selectedItem" class="form-input">
-            <option v-for="(item, index) in items" :key="index" :value="item.text">
-              <img :src="item.imgSrc" alt="" />
-              {{ item.text }}
-            </option>
-          </select>
+            <select v-model="selectedItem" class="form-input">
+              <option
+                v-for="(item, index) in items"
+                :key="index"
+                :value="item.text"
+              >
+                <img :src="item.imgSrc" alt="" />
+                {{ item.text }}
+              </option>
+            </select>
           </div>
         </form>
       </section>
 
-     <div class="chart-container">
-      <canvas ref="chart"></canvas>
-    </div>
+      <div class="chart-container">
+        <canvas ref="chart"></canvas>
+      </div>
     </div>
   </div>
-
 </template>
 
-<script >
+<script>
 import Chart from 'chart.js/auto';
 import axios from 'axios';
 import AuthenticationService from '@/services/AuthenticationService';
@@ -54,11 +57,11 @@ export default {
   //     ]
   //   }
   // },
-  
-data() {
+
+  data() {
     return {
-     weightData:[],
-     fetchedData: null,
+      weightData: [],
+      fetchedData: null,
     };
   },
   mounted() {
@@ -66,27 +69,23 @@ data() {
   },
   methods: {
     fetchData() {
-  const userId = '1'; // 替换为实际的用户 ID
-  AuthenticationService.getWeightData(userId)
-    .then(response => {
-      this.fetchedData = response.data.weight;
-    })
-    .catch(error => {
-      console.error(error);
-    });
-},
-
+      const userId = this.$store.state.user.userid; // 從 Vuex 中獲取使用者 ID
+      console.log(userId);
+      AuthenticationService.getWeightData(userId)
+        .then((response) => {
+          this.fetchedData = response.data.weight;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
-
-
 </script>
-
-
 
 <style>
 .record {
-display: flex;
+  display: flex;
   flex-direction: column;
   width: 800px;
   height: 500px;
@@ -131,18 +130,16 @@ display: flex;
   box-sizing: border-box;
 }
 
-.record-dashboard .record-dashboard-in .record-form  {
- display: flex;
- justify-content: space-around;
+.record-dashboard .record-dashboard-in .record-form {
+  display: flex;
+  justify-content: space-around;
 }
 
-
-.record-dashboard .record-dashboard-in .record-form  .record-word{
- padding-right: 100px;
+.record-dashboard .record-dashboard-in .record-form .record-word {
+  padding-right: 100px;
 }
 
 .record-dashboard .record-dashboard-in .record-form h3 {
-  
   font-size: 30px;
 }
 
