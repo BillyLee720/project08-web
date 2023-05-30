@@ -16,4 +16,7 @@ export default {
   getWeightData(userId) {
     return Api().get(`/user/${userId}/bmi`);
   },
+  changePassword(userId, passwordData) {
+    return Api().patch('/user/password', { userId, ...passwordData });
+  },
 };

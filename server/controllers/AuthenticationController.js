@@ -79,7 +79,22 @@ module.exports = {
       user.username = username;
       user.phone = phone;
       user.height = height;
-      user.password = password;
+      await user.save();
+      res.send(user);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async changePassword(req, res) {
+    const { userId, currentPassword, newPassword } = req.body;
+    console.log(userId);
+    try {
+      const user = await User.findByPk(userId);
+      const isPasswordCorrect = await user.comparePassword(currentPassword);
+      if (!isPasswordCorrect) {
+        return res.status(401).json({ error: '當前密碼不正確' });
+      }
+      user.password = newPassword;
       await hashPassword(user);
       await user.save();
       res.send(user);

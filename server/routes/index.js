@@ -14,4 +14,5 @@ module.exports = (app) => {
   app.get('/user/:id', AuthenticationController.getUser);
   app.patch('/user', AuthenticationController.updateUser);
   app.get('/user/:id/bmi', RecordItemNameController.getData);
+  app.patch('/user/password', AuthenticationController.changePassword);
 };

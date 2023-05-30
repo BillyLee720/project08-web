@@ -1,11 +1,21 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 
+let user = null;
+const userJson = localStorage.getItem('user');
+if (userJson) {
+  try {
+    user = JSON.parse(userJson);
+  } catch (error) {
+    console.error('Error parsing user from localStorage:', error);
+  }
+}
+
 export default createStore({
   strict: true,
   state: {
     token: localStorage.getItem('token') || null,
-    user: JSON.parse(localStorage.getItem('user')) || null,
+    user: user,
     isUserLoggedIn: false,
     isUserEdit: false,
   },
