@@ -63,6 +63,14 @@
           </div>
         </div>
       </section>
+      <el-dialog
+        title="重新登入"
+        :visible="showDialog"
+        @close="showDialog = false"
+        center
+      >
+        <p>請重新登入</p>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -108,6 +116,10 @@ export default {
           //     router.push('/login');
           //   },
           // });
+          this.showDialog = true;
+          this.$store.dispatch('setToken', null);
+          this.$store.dispatch('setUser', null);
+          this.$router.push('/login');
 
           // 清空表單輸入
           this.currentPassword = '';
