@@ -13,8 +13,9 @@ module.exports = {
       const weights = await Weight.findAll({ where: { userid: Id } });
 
       const weightArray = weights.map((weight) => weight.weight);
+      const datetArray = weights.map((date) => date.date);
       console.log('weightArray:', weightArray); // 除錯訊息
-      res.send({ weight: weightArray });
+      res.send({ weight: weightArray, date:datetArray });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: 'Internal Server Error' });

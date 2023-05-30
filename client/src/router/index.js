@@ -10,6 +10,7 @@ import MemberView from '@/views/MemberView.vue';
 import ShopView from '../views/ShopView.vue';
 import ErrorView from '../views/ErrorView.vue';
 import RecordView from '../views/RecordView.vue';
+import ChangePasswordView from '../views/ChangePasswordView.vue'
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     path: '/Record',
     name: 'RecordView',
     component: RecordView,
+  },
+  {
+    path: '/changepassword',
+    name: 'ChangePasswordView',
+    component: ChangePasswordView,
   },
 ];
 

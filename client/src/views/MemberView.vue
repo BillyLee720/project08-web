@@ -7,11 +7,12 @@
           <router-link to="#" class="nav-link">個人資料</router-link>
         </li>
         <li class="nav-item">
-           <router-link to="/record" class="nav-link">紀錄</router-link>
+          <router-link to="/changepassword" class="nav-link">修改密碼</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">選項3</a>
+           <router-link to="/record" class="nav-link">紀錄</router-link>
         </li>
+        
       </ul>
       <section class="dashboard-in">
         <div class="form-div">
@@ -31,7 +32,7 @@
               <input
                 type="date"
                 class="form-input-date"
-                value="2000-01-01"
+                v-model="user.birth"
                 :disabled="disabled"
               />
             </div>
