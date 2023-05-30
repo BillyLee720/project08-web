@@ -6,12 +6,13 @@
           <router-link to="/member" class="nav-link">個人資料</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/changepassword" class="nav-link">修改密碼</router-link>
+          <router-link to="/changepassword" class="nav-link"
+            >修改密碼</router-link
+          >
         </li>
         <li class="nav-item">
           <router-link to="/record" class="nav-link">紀錄</router-link>
         </li>
-        
       </ul>
       <section class="record-dashboard-in">
         <form class="record-form">
@@ -20,13 +21,16 @@
           </div>
 
           <div class="record-form-input">
-            <select v-model="selectedItem" class="form-input">
+            <select
+              v-model="selectedItem"
+              class="form-input"
+              @change="fetchData"
+            >
               <option
                 v-for="(item, index) in items"
                 :key="index"
                 :value="item.text"
-                
-                >
+              >
                 {{ item.text }}
               </option>
             </select>
@@ -34,56 +38,34 @@
         </form>
       </section>
 
-     <div class="chart-container">
-        <canvas v-if="selectedItem === '30天平均bmi'" id="bmiChart"></canvas>
-        <canvas v-else-if="selectedItem === '項目二'" id="chart2"></canvas>
-        <canvas v-else-if="selectedItem === '項目三'" id="chart3"></canvas>
+      <div class="chart-container">
+        <canvas v-if="selectedItem === '10天體重變化'" id="bmiChart"></canvas>
+        <canvas
+          v-else-if="selectedItem === '15天體重變化'"
+          id="chart2"
+        ></canvas>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
-import axios from 'axios';
-import AuthenticationService from '@/services/AuthenticationService';
+import Chart from "chart.js/auto";
+import axios from "axios";
+import AuthenticationService from "@/services/AuthenticationService";
 
 export default {
-
-  // data() {
-  //   return {
-  //     weightData: [],
-  //     fetchedData: null,
-  //   };
-  // },
-  // mounted() {
-  //   this.fetchData();
-  // },
-  // methods: {
-  //   fetchData() {
-  //     const userId = this.$store.state.user.userid; // 從 Vuex 中獲取使用者 ID
-  //     console.log(userId);
-  //     AuthenticationService.getWeightData(userId)
-  //       .then((response) => {
-  //         this.fetchedData = response.data.weight;
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   },
-  // },
   data() {
     return {
-       selectedItem: '30天平均bmi',
+      selectedItem: "15天體重變化",
 
       items: [
-       { value: '1', id: 'bmiChart', text: '30天平均bmi' },
-        { value: '2', id: 'chart2', text: '項目二' },
-        { value: '3', id: 'chart3', text: '項目三' },
+        { value: "1", id: "bmiChart", text: "10天體重變化" },
+        { value: "2", id: "chart2", text: "15天體重變化" },
       ],
       weightData: [],
-     fetchedData: null,
-    
+      chart2Data: [],
+      fetchedData: null,
     };
   },
   mounted() {
@@ -92,39 +74,67 @@ export default {
   methods: {
     fetchData() {
       const userId = this.$store.state.user.userid; // 從 Vuex 中獲取使用者 ID
-      console.log(userId);
       AuthenticationService.getWeightData(userId)
-      
+
         .then((response) => {
-          const weightData = response.data.weight.slice(0, 10);;
-
-          // 建立日期數組
-          const dates = response.data.date.slice(0, 10);;
-
-          // 建立 BMI 數值數組
-          // const bmiValues = weightData.map((item) => item.bmi);
-
-          console.log(dates);
-          // 繪製圖表
-          this.drawChart(dates, weightData);
+          if (this.selectedItem === "10天體重變化") {
+            const weightData = response.data.weight.slice(0, 10);
+            const dates = response.data.date.slice(0, 10);
+            console.log(weightData);
+            console.log(dates);
+            this.drawChart(dates, weightData);
+          } else if (this.selectedItem === "15天體重變化") {
+            const chart2Data = response.data.weight.slice(0, 15);
+            const chart2dates = response.data.date.slice(0, 15);
+            console.log(chart2Data);
+            console.log(chart2dates);
+            this.drawChart2(chart2dates, chart2Data);
+          }
         })
         .catch((error) => {
           console.error(error);
         });
     },
     drawChart(dates, weightData) {
-      const ctx = document.getElementById('bmiChart').getContext('2d');
+      const ctx = document.getElementById("bmiChart").getContext("2d");
 
       this.bmiChart = new Chart(ctx, {
-        type: 'line',
+        type: "line",
         data: {
           labels: dates,
           datasets: [
             {
-              label: '30-Day WEIGHT',
+              label: "10-Day WEIGHT",
               data: weightData,
-              backgroundColor: 'yellow',
-              borderColor: 'yellow',
+              backgroundColor: "yellow",
+              borderColor: "yellow",
+              borderWidth: 2,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    },
+
+    drawChart2(chart2dates, chart2Data) {
+      const ctx = document.getElementById("chart2").getContext("2d");
+      this.chart2 = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: chart2dates,
+          datasets: [
+            {
+              label: "30-Day WEIGHT",
+              data: chart2Data,
+              backgroundColor: "green",
+              borderColor: "green",
               borderWidth: 2,
               tension: 0.1,
             },
@@ -140,8 +150,6 @@ export default {
       });
     },
   },
-
-  
 };
 </script>
 
@@ -218,10 +226,10 @@ export default {
   padding-left: 10px;
 }
 
-  .chart-container {
+/* .chart-container {
     width: 800px;
     height: 400px;
     margin: 0 auto;
     color: black;
-  }
+  } */
 </style>

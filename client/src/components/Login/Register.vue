@@ -62,24 +62,41 @@
           <p><a href="/LoginView/forgetPassword">忘記密碼</a></p>
         </div>
       </div> -->
-    <div class="error" v-html="error" />
+    <!-- <div class="error" v-html="error" /> -->
   </div>
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService';
+import AuthenticationService from "@/services/AuthenticationService";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 export default {
   data() {
     return {
-      email: '',
-      password: '',
-      userName: '',
+      email: "",
+      password: "",
+      userName: "",
       error: null,
       // name: '',
     };
   },
 
   methods: {
+    showRegisterSuccess() {
+      toast.success("Register Success!", {
+        autoClose: 3000,
+      });
+    },
+    showRegisterError(error) {
+      toast.error(error, {
+        autoClose: 2500,
+        theme: "colored",
+      });
+    },
+    loadingToast(){
+      toast.call('loading',{
+      })
+    },
     async register() {
       try {
         const response = await AuthenticationService.register({
@@ -89,17 +106,25 @@ export default {
           // error: null,
         });
         // console.log(response.data);
-        this.$store.dispatch('setToken', response.data.token);
-        this.$store.dispatch('setUser', response.data.user);
+        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user);
+        this.showRegisterSuccess();
+        this.loadingToast()
+        setTimeout(() => {
+
+          this.$router.push("/login");
+        }, 3000); // 5秒延迟
+        // this.$router.push("/login");
       } catch (error) {
-        this.error = error.response.data.error;
+        console.log(error.response); // 打印错误响应以查看其结构和错误消息
+        this.showRegisterError(error.response.data.error);
       }
     },
   },
 };
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap");
 .login-page {
   display: flex;
   justify-content: center; /*水平置中*/
@@ -174,7 +199,7 @@ export default {
 
 .login-item label {
   /* font-weight: bold; */
-  font-family: 'Noto Serif TC', Sans-serif;
+  font-family: "Noto Serif TC", Sans-serif;
 }
 .login-item input {
   border: none;
@@ -205,7 +230,7 @@ export default {
 }
 .register-foot a {
   color: #393e46;
-  font-family: 'Noto Serif TC', Sans-serif;
+  font-family: "Noto Serif TC", Sans-serif;
   font-weight: bold;
 }
 .register-foot a:hover {

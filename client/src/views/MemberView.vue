@@ -72,7 +72,6 @@
                 <option>女</option>
               </select>
             </div>
-            <button class="btn" @click="toggleChange">更改資料</button>
             <!-- <div class="edit-button"> -->
             <button class="btn" @click="SaveChanges">儲存</button>
             <button class="btn" @click="toggleCancel">取消</button>
