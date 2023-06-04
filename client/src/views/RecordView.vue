@@ -50,40 +50,54 @@
 </template>
 
 <script>
-import Chart from "chart.js/auto";
-import axios from "axios";
-import AuthenticationService from "@/services/AuthenticationService";
+import Chart from 'chart.js/auto';
+import axios from 'axios';
+import AuthenticationService from '@/services/AuthenticationService';
 
 export default {
   data() {
     return {
-      selectedItem: "15天體重變化",
+      user: {},
+      selectedItem: '15天體重變化',
 
       items: [
-        { value: "1", id: "bmiChart", text: "10天體重變化" },
-        { value: "2", id: "chart2", text: "15天體重變化" },
+        { value: '1', id: 'bmiChart', text: '10天體重變化' },
+        { value: '2', id: 'chart2', text: '15天體重變化' },
       ],
       weightData: [],
       chart2Data: [],
       fetchedData: null,
     };
   },
+  created() {
+    this.chenckToken();
+  },
   mounted() {
     this.fetchData();
   },
   methods: {
+    chenckToken() {
+      const token = this.$store.state.token;
+      if (token === null) {
+        this.$router.push('/login');
+      }
+    },
     fetchData() {
+      const user = this.$store.state.user;
+      if (!user || !user.userid) {
+        return; // 防止執行後續代碼
+      }
       const userId = this.$store.state.user.userid; // 從 Vuex 中獲取使用者 ID
       AuthenticationService.getWeightData(userId)
 
         .then((response) => {
-          if (this.selectedItem === "10天體重變化") {
+          if (this.selectedItem === '10天體重變化') {
             const weightData = response.data.weight.slice(0, 10);
             const dates = response.data.date.slice(0, 10);
             console.log(weightData);
             console.log(dates);
             this.drawChart(dates, weightData);
-          } else if (this.selectedItem === "15天體重變化") {
+          } else if (this.selectedItem === '15天體重變化') {
             const chart2Data = response.data.weight.slice(0, 15);
             const chart2dates = response.data.date.slice(0, 15);
             console.log(chart2Data);
@@ -96,18 +110,18 @@ export default {
         });
     },
     drawChart(dates, weightData) {
-      const ctx = document.getElementById("bmiChart").getContext("2d");
+      const ctx = document.getElementById('bmiChart').getContext('2d');
 
       this.bmiChart = new Chart(ctx, {
-        type: "line",
+        type: 'line',
         data: {
           labels: dates,
           datasets: [
             {
-              label: "10-Day WEIGHT",
+              label: '10-Day WEIGHT',
               data: weightData,
-              backgroundColor: "yellow",
-              borderColor: "yellow",
+              backgroundColor: 'yellow',
+              borderColor: 'yellow',
               borderWidth: 2,
               tension: 0.1,
             },
@@ -124,17 +138,17 @@ export default {
     },
 
     drawChart2(chart2dates, chart2Data) {
-      const ctx = document.getElementById("chart2").getContext("2d");
+      const ctx = document.getElementById('chart2').getContext('2d');
       this.chart2 = new Chart(ctx, {
-        type: "line",
+        type: 'line',
         data: {
           labels: chart2dates,
           datasets: [
             {
-              label: "30-Day WEIGHT",
+              label: '30-Day WEIGHT',
               data: chart2Data,
-              backgroundColor: "green",
-              borderColor: "green",
+              backgroundColor: 'green',
+              borderColor: 'green',
               borderWidth: 2,
               tension: 0.1,
             },

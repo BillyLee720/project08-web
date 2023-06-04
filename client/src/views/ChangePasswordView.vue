@@ -63,14 +63,6 @@
           </div>
         </div>
       </section>
-      <el-dialog
-        title="重新登入"
-        :visible="showDialog"
-        @close="showDialog = false"
-        center
-      >
-        <p>請重新登入</p>
-      </el-dialog>
     </div>
   </div>
 </template>
@@ -79,6 +71,8 @@
 import { mapActions, mapState } from 'vuex';
 import AuthenticationService from '@/services/AuthenticationService';
 import router from '@/router';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: 'ChangePasswordView',
@@ -91,11 +85,39 @@ export default {
     };
   },
   methods: {
+    showChangePasswordSuccess() {
+      toast.success('密碼更改成功，請重新登入!!', {
+        autoClose: 3000,
+        limit: 1,
+        position: 'top-center',
+        onclose: () => {
+          this.$store.commit('clearUser');
+          this.$store.commit('clearToken');
+          this.$router.push('/login');
+        },
+      });
+    },
+    showChangePasswordError(error) {
+      toast.error(error, {
+        autoClose: 2500,
+        theme: 'colored',
+        limit: 3,
+      });
+    },
     async SaveChanges() {
       const userId = this.$store.state.user.userid;
+      console.log(this.newPassword, this.confirmPassword);
       try {
+        if (this.currentPassword === null) {
+          this.showChangePasswordError('當前密碼為空');
+        }
+        if (this.newPassword === null) {
+          this.showChangePasswordError('');
+        }
         if (this.newPassword !== this.confirmPassword) {
+          this.show;
           console.error('新密碼與確認密碼不符合');
+          this.showChangePasswordError('新密碼與確認密碼不符合');
           return;
         }
         console.log(userId);
@@ -105,17 +127,7 @@ export default {
         });
         if (response.success) {
           console.log('密碼已成功更改');
-          // MessageBox.alert('請重新登入', '密碼更改成功', {
-          //   confirmButtonText: '確定',
-          //   callback: () => {
-          //     // 清空使用者資料
-          //     this.$store.commit('clearUser');
-          //     this.$store.commit('clearToken');
-
-          //     // 導向登入頁面
-          //     router.push('/login');
-          //   },
-          // });
+          this.showChangePasswordSuccess();
           this.showDialog = true;
           this.$store.dispatch('setToken', null);
           this.$store.dispatch('setUser', null);
@@ -127,9 +139,11 @@ export default {
           this.confirmPassword = '';
         } else {
           console.error('無法更改密碼:', response.error);
+          this.showChangePasswordError(response.error);
         }
       } catch (error) {
         console.error('Failed to update user:', error);
+        this.showChangePasswordError(error.response.data.error);
       }
     },
     toggleCancel() {

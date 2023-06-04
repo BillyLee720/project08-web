@@ -1,7 +1,6 @@
 <template>
   <div class="login-page">
     <!-- <div class="login-title"></div> -->
-    <div class="error-message" v-if="error">{{ error }}</div>
     <div class="login-item">
       <div class="login-account">
         <label>帳號</label>
@@ -45,6 +44,8 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
   data() {
     return {
@@ -55,20 +56,25 @@ export default {
   },
 
   methods: {
+    loadingToast() {
+      toast.loading('正在登入中...', {
+        autoClose: false,
+      });
+    },
     async login() {
       try {
+        this.loadingToast();
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password,
         });
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
-        this.$router.push('/member');
+        setTimeout(() => {
+          this.$router.push('/member');
+        }, 3000);
       } catch (error) {
         this.error = error.response.data.error;
-        setTimeout(() => {
-          this.error = null;
-        }, 2500);
       }
     },
   },

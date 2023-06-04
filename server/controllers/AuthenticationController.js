@@ -73,12 +73,14 @@ module.exports = {
   },
   async updateUser(req, res) {
     try {
-      const { email, username, phone, height, password } = req.body;
+      const { email, username, phone, height, gender, birth } = req.body;
       // console.log(email);
       const user = await User.findOne({ where: { email: email } });
       user.username = username;
       user.phone = phone;
       user.height = height;
+      this.gender = gender;
+      this.birth = birth;
       await user.save();
       res.send(user);
     } catch (err) {

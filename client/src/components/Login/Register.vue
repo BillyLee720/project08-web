@@ -14,17 +14,6 @@
           placeholder="UserName"
         />
       </div>
-      <div class="login-name">
-        <label>姓名</label>
-        <input
-          type="Name"
-          name="Name"
-          v-model="Name"
-          size="25px"
-          rules="nameRules"
-          placeholder="Name"
-        />
-      </div>
       <div class="login-account">
         <label>帳號</label>
         <input
@@ -46,7 +35,6 @@
           placeholder="Password"
         />
       </div>
-
       <div class="submit-button">
         <Button class="register-button" @click="register">註冊</Button>
       </div>
@@ -67,35 +55,32 @@
 </template>
 
 <script>
-import AuthenticationService from "@/services/AuthenticationService";
-import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
+import AuthenticationService from '@/services/AuthenticationService';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-      userName: "",
+      email: '',
+      password: '',
+      userName: '',
       error: null,
-      // name: '',
     };
   },
 
   methods: {
     showRegisterSuccess() {
-      toast.success("Register Success!", {
+      toast.success('註冊成功，正在跳轉!', {
         autoClose: 3000,
+        limit: 1,
       });
     },
     showRegisterError(error) {
       toast.error(error, {
         autoClose: 2500,
-        theme: "colored",
+        theme: 'colored',
+        limit: 3,
       });
-    },
-    loadingToast(){
-      toast.call('loading',{
-      })
     },
     async register() {
       try {
@@ -106,14 +91,12 @@ export default {
           // error: null,
         });
         // console.log(response.data);
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
         this.showRegisterSuccess();
-        this.loadingToast()
         setTimeout(() => {
-
-          this.$router.push("/login");
-        }, 3000); // 5秒延迟
+          this.$router.push('/login');
+        }, 3000);
         // this.$router.push("/login");
       } catch (error) {
         console.log(error.response); // 打印错误响应以查看其结构和错误消息
@@ -124,7 +107,7 @@ export default {
 };
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap');
 .login-page {
   display: flex;
   justify-content: center; /*水平置中*/
@@ -199,7 +182,7 @@ export default {
 
 .login-item label {
   /* font-weight: bold; */
-  font-family: "Noto Serif TC", Sans-serif;
+  font-family: 'Noto Serif TC', Sans-serif;
 }
 .login-item input {
   border: none;
@@ -230,7 +213,7 @@ export default {
 }
 .register-foot a {
   color: #393e46;
-  font-family: "Noto Serif TC", Sans-serif;
+  font-family: 'Noto Serif TC', Sans-serif;
   font-weight: bold;
 }
 .register-foot a:hover {

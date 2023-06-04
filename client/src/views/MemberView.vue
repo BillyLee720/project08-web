@@ -33,6 +33,7 @@
                 type="date"
                 class="form-input-date"
                 v-model="user.birth"
+                @change="updateBirth"
                 :disabled="disabled"
               />
             </div>
@@ -67,9 +68,14 @@
             </div>
             <div class="form-row">
               <label for="gender" class="form-label">性別</label>
-              <select class="form-input-gender" :disabled="disabled">
-                <option>男</option>
-                <option>女</option>
+              <select
+                class="form-input-gender"
+                v-model="gender"
+                :disabled="disabled"
+              >
+                <option value="">請選擇</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
               </select>
             </div>
             <!-- <div class="edit-button"> -->
@@ -86,6 +92,9 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import axios from 'axios';
+import { router } from '@/router';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 import AuthenticationService from '@/services/AuthenticationService';
 
@@ -93,18 +102,36 @@ export default {
   name: 'MemberPage',
   data() {
     return {
+      user: {},
       email: '',
       username: '',
       phone: '',
       height: '',
       disabled: false,
+      gender: '',
+      birth: '',
     };
   },
   created() {
+    this.user = JSON.parse(JSON.stringify(this.$store.state.user));
     this.originalUser = JSON.parse(JSON.stringify(this.user));
+    this.chenckToken();
   },
   computed: mapState(['user']),
   methods: {
+    chenckToken() {
+      const token = this.$store.state.token;
+      if (token === null) {
+        this.$router.push('/login');
+      }
+    },
+    showLoginSuccess(successinfo) {
+      toast.success(successinfo, {
+        autoClose: 3000,
+        limit: 1,
+        position: 'top-center',
+      });
+    },
     toggleChange() {
       this.isReadOnly = !this.isReadOnly;
       this.disabled = false;
@@ -117,6 +144,8 @@ export default {
           username: this.user.username,
           phone: this.user.phone,
           height: this.user.height,
+          gender: this.user.gender,
+          birth: this.user.birth,
         });
         console.log(response);
         // this.$store.dispatch('updateUser', response.data.userData);
@@ -130,6 +159,10 @@ export default {
       this.user = JSON.parse(JSON.stringify(this.originalUser));
       this.disabled = true;
       this.isReadOnly = true;
+    },
+    updateBirth(event) {
+      this.user.birth = event.target.value;
+      console.log(this.user.birth);
     },
   },
 };

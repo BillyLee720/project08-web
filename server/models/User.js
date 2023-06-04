@@ -60,6 +60,7 @@ const User = sequelize.define(
     birth: DataTypes.STRING,
     gender: DataTypes.CHAR,
     phone: DataTypes.STRING,
+    hight: DataTypes.STRING,
   },
   {
     hooks: {

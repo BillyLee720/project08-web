@@ -10,7 +10,8 @@ import MemberView from '@/views/MemberView.vue';
 import ShopView from '../views/ShopView.vue';
 import ErrorView from '../views/ErrorView.vue';
 import RecordView from '../views/RecordView.vue';
-import ChangePasswordView from '../views/ChangePasswordView.vue'
+import ChangePasswordView from '../views/ChangePasswordView.vue';
+import { store } from '@/store/store';
 
 const routes = [
   {
@@ -27,11 +28,13 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: { requiresGuest: true },
   },
   {
     path: '/register',
     name: 'register',
     component: Register,
+    meta: { requiresGuest: true },
   },
   {
     path: '/Calculator',
