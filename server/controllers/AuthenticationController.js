@@ -15,7 +15,7 @@ module.exports = {
       const user = await User.create(req.body);
       res.send(user.toJSON());
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       res.status(400).send({
         error: 'This email account is already in use.',
       });
@@ -62,11 +62,9 @@ module.exports = {
           error: 'User not found',
         });
       }
-      const decryptedPassword = decryptPassword(user.password);
       const userObj = user.toJSON();
-      delete userObj.password;
       console.log(userObj);
-      res.send({ ...userObj, password: decryptedPassword });
+      res.send(userObj);
     } catch (err) {
       console.log(err);
     }
@@ -79,8 +77,8 @@ module.exports = {
       user.username = username;
       user.phone = phone;
       user.height = height;
-      this.gender = gender;
-      this.birth = birth;
+      user.gender = gender;
+      user.birth = birth;
       await user.save();
       res.send(user);
     } catch (err) {

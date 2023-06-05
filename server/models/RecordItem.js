@@ -3,15 +3,21 @@ const sequelize = require('./index');
 const { RecordDate } = require('./RecordDate');
 const { RecordItemName } = require('./RecordItemName');
 
-const RecordItem = sequelize.define('recorditem', {
-  nid: {
-    primaryKey: true,
-    type: DataTypes.INTEGER,
-    autoIncrement: false,
+const RecordItem = sequelize.define(
+  'recorditem',
+  {
+    nid: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+      autoIncrement: false,
+    },
+    sid: DataTypes.INTEGER,
+    item: DataTypes.STRING,
   },
-  sid: DataTypes.INTEGER,
-  item: DataTypes.STRING,
-});
+  {
+    tableName: 'RecordItem',
+  }
+);
 
 // RecordItem.belongsTo(RecordDate, {
 //   foreignKey: 'sid',

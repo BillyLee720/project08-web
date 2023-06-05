@@ -39,10 +39,14 @@
       </section>
 
       <div class="chart-container">
-        <canvas v-if="selectedItem === '10天體重變化'" id="bmiChart"></canvas>
+        <canvas v-if="selectedItem === '7天體重變化'" id="bmiChart"></canvas>
         <canvas
           v-else-if="selectedItem === '15天體重變化'"
           id="chart2"
+        ></canvas>
+        <canvas
+          v-else-if="selectedItem === '30天體重變化'"
+          id="chart3"
         ></canvas>
       </div>
     </div>
@@ -57,52 +61,46 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data() {
     return {
-      user: {},
-      selectedItem: '15天體重變化',
+      selectedItem: '7天體重變化',
 
       items: [
-        { value: '1', id: 'bmiChart', text: '10天體重變化' },
+        { value: '1', id: 'bmiChart', text: '7天體重變化' },
         { value: '2', id: 'chart2', text: '15天體重變化' },
+        { value: '3', id: 'chart3', text: '30天體重變化' },
       ],
       weightData: [],
       chart2Data: [],
+      chart3Data: [],
       fetchedData: null,
     };
-  },
-  created() {
-    this.chenckToken();
   },
   mounted() {
     this.fetchData();
   },
   methods: {
-    chenckToken() {
-      const token = this.$store.state.token;
-      if (token === null) {
-        this.$router.push('/login');
-      }
-    },
     fetchData() {
-      const user = this.$store.state.user;
-      if (!user || !user.userid) {
-        return; // 防止執行後續代碼
-      }
       const userId = this.$store.state.user.userid; // 從 Vuex 中獲取使用者 ID
       AuthenticationService.getWeightData(userId)
 
         .then((response) => {
-          if (this.selectedItem === '10天體重變化') {
-            const weightData = response.data.weight.slice(0, 10);
-            const dates = response.data.date.slice(0, 10);
+          if (this.selectedItem === '7天體重變化') {
+            const weightData = response.data.weight.slice(-10);
+            const dates = response.data.date.slice(-10);
             console.log(weightData);
             console.log(dates);
             this.drawChart(dates, weightData);
           } else if (this.selectedItem === '15天體重變化') {
-            const chart2Data = response.data.weight.slice(0, 15);
-            const chart2dates = response.data.date.slice(0, 15);
+            const chart2Data = response.data.weight.slice(-15);
+            const chart2dates = response.data.date.slice(-15);
             console.log(chart2Data);
             console.log(chart2dates);
             this.drawChart2(chart2dates, chart2Data);
+          } else if (this.selectedItem === '30天體重變化') {
+            const chart3Data = response.data.weight.slice(-30);
+            const chart3dates = response.data.date.slice(-30);
+            console.log(chart3Data);
+            console.log(chart3dates);
+            this.drawChart3(chart3dates, chart3Data);
           }
         })
         .catch((error) => {
@@ -118,7 +116,7 @@ export default {
           labels: dates,
           datasets: [
             {
-              label: '10-Day WEIGHT',
+              label: '7-Day WEIGHT',
               data: weightData,
               backgroundColor: 'yellow',
               borderColor: 'yellow',
@@ -145,10 +143,36 @@ export default {
           labels: chart2dates,
           datasets: [
             {
-              label: '30-Day WEIGHT',
+              label: '15-Day WEIGHT',
               data: chart2Data,
               backgroundColor: 'green',
               borderColor: 'green',
+              borderWidth: 2,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    },
+    drawChart3(chart3dates, chart3Data) {
+      const ctx = document.getElementById('chart3').getContext('2d');
+      this.chart3 = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chart3dates,
+          datasets: [
+            {
+              label: '30-Day WEIGHT',
+              data: chart3Data,
+              backgroundColor: 'red',
+              borderColor: 'red',
               borderWidth: 2,
               tension: 0.1,
             },
@@ -246,4 +270,93 @@ export default {
     margin: 0 auto;
     color: black;
   } */
+
+@media (max-width: 768px) {
+  .record {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 50px auto 100px auto;
+  }
+
+  .record-dashboard {
+    border-radius: 5px;
+    background: #ffffffad;
+  }
+
+  .record-dashboard .nav-tabs {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+  }
+
+  .record-dashboard .nav-tabs .nav-item {
+    display: inline;
+  }
+
+  .record-dashboard .nav-tabs .nav-item .nav-link {
+    color: black;
+    float: left;
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid black;
+    font-size: 16px;
+    background-color: #ffffffad;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .record-dashboard .nav-tabs .nav-item .nav-link:hover {
+    background-color: rgb(97, 95, 95);
+  }
+
+  .record-dashboard .record-dashboard-in {
+    width: 100%;
+    padding: 0px 20px 20px;
+    box-sizing: border-box;
+  }
+
+  .record-dashboard .record-dashboard-in .form-div h3 {
+    font-size: 30px;
+  }
+
+  .record-dashboard .record-dashboard-in .form-div .form-center {
+    grid-template-columns: 1fr;
+    align-items: center;
+    column-gap: 2rem;
+    display: grid;
+    row-gap: 0.5rem;
+  }
+
+  .record-dashboard .record-dashboard-in .form-div .form-center .form-row {
+    margin-bottom: 10px;
+  }
+
+  .record-dashboard
+    .record-dashboard-in
+    .form-div
+    .form-center
+    .form-row
+    .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .record-dashboard
+    .record-dashboard-in
+    .form-div
+    .form-center
+    .form-row
+    .form-input {
+    width: 100%;
+    border: 1px solid var(--grey-200);
+    font-size: 100%;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+  }
+}
 </style>

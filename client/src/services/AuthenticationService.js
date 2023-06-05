@@ -7,8 +7,8 @@ export default {
   login(credentials) {
     return Api().post('login', credentials);
   },
-  getUser() {
-    return Api().get('api/user');
+  getUser(userId) {
+    return Api().get(`/user/${userId}`);
   },
   updateUser(userData) {
     return Api().patch('/user', userData);

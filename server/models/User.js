@@ -60,8 +60,11 @@ const User = sequelize.define(
     birth: DataTypes.STRING,
     gender: DataTypes.CHAR,
     phone: DataTypes.STRING,
-    hight: DataTypes.STRING,
+    height: DataTypes.STRING,
   },
+  // {
+  //   timestamps: false,
+  // },
   {
     hooks: {
       beforeCreate: async (user, options) => {

@@ -72,7 +72,7 @@ export default {
         this.$store.dispatch('setUser', response.data.user);
         setTimeout(() => {
           this.$router.push('/member');
-        }, 3000);
+        }, 1800);
       } catch (error) {
         this.error = error.response.data.error;
       }

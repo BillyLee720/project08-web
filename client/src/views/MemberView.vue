@@ -62,6 +62,7 @@
               <input
                 type="text"
                 class="form-input"
+                v-model="user.height"
                 v-bind:readonly="isReadOnly"
                 :disabled="disabled"
               />
@@ -70,7 +71,7 @@
               <label for="gender" class="form-label">性別</label>
               <select
                 class="form-input-gender"
-                v-model="gender"
+                v-model="user.gender"
                 :disabled="disabled"
               >
                 <option value="">請選擇</option>
@@ -79,11 +80,20 @@
               </select>
             </div>
             <!-- <div class="edit-button"> -->
-            <button class="btn" @click="SaveChanges">儲存</button>
-            <button class="btn" @click="toggleCancel">取消</button>
+
+            <button v-if="!disabled" class="btn" @click="SaveChanges">
+              儲存
+            </button>
+            <button v-if="!disabled" class="btn" @click="toggleCancel">
+              取消
+            </button>
+
             <!-- </div> -->
           </div>
         </div>
+        <button v-if="disabled" class="btn-c" @click="EditData">
+          修改資料
+        </button>
       </section>
     </div>
   </div>
@@ -102,14 +112,14 @@ export default {
   name: 'MemberPage',
   data() {
     return {
-      user: {},
       email: '',
       username: '',
       phone: '',
       height: '',
-      disabled: false,
+      disabled: true,
       gender: '',
       birth: '',
+      user: {},
     };
   },
   created() {
@@ -136,6 +146,9 @@ export default {
       this.isReadOnly = !this.isReadOnly;
       this.disabled = false;
     },
+    EditData() {
+      this.disabled = !this.disabled;
+    },
     async SaveChanges() {
       try {
         const response = await AuthenticationService.updateUser({
@@ -147,12 +160,27 @@ export default {
           gender: this.user.gender,
           birth: this.user.birth,
         });
+
         console.log(response);
         // this.$store.dispatch('updateUser', response.data.userData);
         console.log('User updated successfully!');
+        toast.success('資料更新成功!!', {
+          autoClose: 1500,
+          position: 'top-center',
+        });
+        await this.fetchUserData();
         this.disabled = true;
       } catch (error) {
         console.error('Failed to update user:', error);
+      }
+    },
+    async fetchUserData() {
+      const userId = this.$store.state.user.userid;
+      try {
+        const response = await AuthenticationService.getUser(userId);
+        this.user = response.data;
+      } catch (err) {
+        console.log('Fail to fetch user data:', error);
       }
     },
     toggleCancel() {
@@ -278,7 +306,27 @@ export default {
   height: 35px;
 }
 
+.dashboard .dashboard-in .btn-c {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  width: 364px;
+  height: 35px;
+  margin-left: 200px;
+}
+
 .dashboard .dashboard-in .form-div .form-center .btn:hover {
+  background-color: rgb(196, 248, 185);
+  transform: scale(1);
+  transition: 0.2s;
+}
+
+.dashboard .dashboard-in .btn-c:hover {
   background-color: rgb(196, 248, 185);
   transform: scale(1);
   transition: 0.2s;
@@ -289,7 +337,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 900px;
+    height: 800px;
     margin: 50px auto 100px auto;
   }
 
@@ -394,7 +442,27 @@ export default {
     height: 35px;
   }
 
+  .dashboard .dashboard-in .btn-c {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+    width: 460px;
+    height: 35px;
+    margin-left: 0px;
+  }
+
   .dashboard .dashboard-in .form-div .form-center .btn:hover {
+    background-color: rgb(196, 248, 185);
+    transform: scale(1);
+    transition: 0.2s;
+  }
+
+  .dashboard .dashboard-in .btn-c:hover {
     background-color: rgb(196, 248, 185);
     transform: scale(1);
     transition: 0.2s;
