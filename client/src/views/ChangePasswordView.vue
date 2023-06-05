@@ -111,8 +111,8 @@ export default {
         if (this.currentPassword === null) {
           this.showChangePasswordError('當前密碼為空');
         }
-        if (this.newPassword === null) {
-          this.showChangePasswordError('');
+        if (this.newPassword === null || this.confirmPassword === null) {
+          this.showChangePasswordError('更改的密碼為空');
         }
         if (this.newPassword !== this.confirmPassword) {
           this.show;

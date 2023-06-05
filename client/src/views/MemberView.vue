@@ -123,6 +123,7 @@ export default {
     };
   },
   created() {
+    this.fetchUserData()
     this.user = JSON.parse(JSON.stringify(this.$store.state.user));
     this.originalUser = JSON.parse(JSON.stringify(this.user));
     this.chenckToken();
@@ -169,6 +170,7 @@ export default {
           position: 'top-center',
         });
         await this.fetchUserData();
+        location.reload();
         this.disabled = true;
       } catch (error) {
         console.error('Failed to update user:', error);
@@ -178,7 +180,8 @@ export default {
       const userId = this.$store.state.user.userid;
       try {
         const response = await AuthenticationService.getUser(userId);
-        this.user = response.data;
+        this.$store.dispatch('setUser', response.data);
+        
       } catch (err) {
         console.log('Fail to fetch user data:', error);
       }
