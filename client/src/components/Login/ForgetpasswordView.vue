@@ -10,30 +10,30 @@
       <div class="submit-button">
         <Button class="forget-button" @click="validateEmail">送出</Button>
       </div>
-      <el-dialog title="Error" :visible.sync="showEmailEmptyDialog">
-        Please enter your email address.
-      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
+import AuthenticationService from '@/services/AuthenticationService';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 export default {
   data() {
     return {
       email: '',
-      showEmailEmptyDialog: false,
     };
   },
   methods: {
-    validateEmail() {
-      if (!this.email) {
-        this.showEmailEmptyDialog = true;
-        setTimeout(() => {
-          this.showEmailEmptyDialog = false;
-        }, 5000);
-      } else {
-        // do something else
+    async validateEmail() {
+      try {
+        const response = await AuthenticationService.forgotPassword({
+          email: this.email,
+        });
+        toast.success('請檢察信箱中的郵件');
+      } catch (err) {
+        console.log(err);
       }
     },
   },

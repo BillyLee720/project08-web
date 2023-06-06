@@ -25,6 +25,7 @@ const Food = sequelize.define(
   },
   {
     tableName: 'Food',
+    timestamps: false,
   }
 );
 // Food.belongsTo(FoodDate, {

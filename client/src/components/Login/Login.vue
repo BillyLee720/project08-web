@@ -75,6 +75,10 @@ export default {
         }, 1800);
       } catch (error) {
         this.error = error.response.data.error;
+        toast.error(this.error, {
+          autoClose: 3000,
+          position: 'top-center',
+        });
       }
     },
   },

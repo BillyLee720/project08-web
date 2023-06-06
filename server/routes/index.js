@@ -15,4 +15,6 @@ module.exports = (app) => {
   app.get('/user/:id', AuthenticationController.getUser);
   app.get('/user/:id/bmi', RecordItemNameController.getData);
   app.patch('/user/password', AuthenticationController.changePassword);
+  app.post('/forgotpassword', AuthenticationController.forgotPassword);
+  app.patch('/reset-password', AuthenticationController.resetPassword);
 };

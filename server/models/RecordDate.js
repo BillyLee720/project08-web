@@ -16,13 +16,8 @@ const RecordDate = sequelize.define(
   },
   {
     tableName: 'RecordDate',
+    timestamps: false,
   }
 );
 
-// RecordDate.belongsTo(User, {
-//   foreignKey: 'userid',
-// });
-// RecordDate.hasMany(RecordItem, {
-//   foreignKey: 'sid',
-// });
 module.exports = { RecordDate };

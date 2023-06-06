@@ -1,12 +1,42 @@
 const { User, hashPassword, decryptPassword } = require('../models/User');
 const jwt = require('jsonwebtoken');
 const sequelize = require('../models/index');
+const nodemailer = require('nodemailer');
+const { func } = require('joi');
 
 function jwtSignUser(user) {
   const ONE_WEEK = 60 * 60 * 24 * 7;
   return jwt.sign(user, process.env.JWT_SECRET || 'secret', {
     expiresIn: ONE_WEEK,
   });
+}
+const transporter = nodemailer.createTransport({
+  service: 'your-email-service-provider',
+  auth: {
+    user: 'your-email-username',
+    pass: 'your-email-password',
+  },
+});
+
+async function sendResetPasswordEmail(email) {
+  const resetPasswordLink = generateResetPasswordLink(email);
+  const mailOptions = {
+    from: 'your-email-sender',
+    to: email,
+    subject: '重製密碼',
+    text: `請點擊以下網址重製你的密碼: ${resetPasswordLink}`,
+  };
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('重置密碼郵件已發送');
+  } catch (error) {
+    console.error('發送重置密碼郵件時出錯:', error);
+  }
+}
+
+function generateResetPasswordLink(email) {
+  const resetPasswordLink = ``;
+  return resetPasswordLink;
 }
 
 module.exports = {
@@ -97,6 +127,34 @@ module.exports = {
       user.password = newPassword;
       await hashPassword(user);
       await user.save();
+      res.send(user);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async forgotPassword(req, res) {
+    const { email } = req.body;
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ error: '用戶不存在' });
+      }
+      const resetPasswordLink = generateResetPasswordLink(email);
+      await sendResetPasswordEmail(email, resetPasswordLink);
+      res.status(200).json({ message: '重製密碼郵件已發送!' });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async resetPassword(req, res) {
+    const { userId, newPassword, confirmPassword } = req.body;
+    try {
+      const user = await User.findByPk(userId);
+      if (newPassword != confirmPassword) {
+        return res.status(401).json({ error: '兩組密碼不相符' });
+      }
+      user.password = newPassword;
+      await hashPassword(user);
       res.send(user);
     } catch (err) {
       console.log(err);

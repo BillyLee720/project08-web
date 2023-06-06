@@ -20,7 +20,8 @@ const Weight = sequelize.define(
     },
   },
   {
-    tableName: 'Weight',
+    timestamps: false,
+    tableName: 'WeightHeight',
   }
 );
 

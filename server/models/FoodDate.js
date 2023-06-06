@@ -17,6 +17,7 @@ const FoodDate = sequelize.define(
   },
   {
     tableName: 'FoodDate',
+    timestamps: false,
   }
 );
 

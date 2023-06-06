@@ -16,6 +16,7 @@ const RecordItem = sequelize.define(
   },
   {
     tableName: 'RecordItem',
+    timestamps: false,
   }
 );
 

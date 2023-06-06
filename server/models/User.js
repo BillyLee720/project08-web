@@ -10,16 +10,20 @@ const { RecordItem } = require('./recorditem');
 const { RecordItemName } = require('./RecordItemName');
 
 async function hashPassword(user, options) {
-  // const secretKey = 'TestGym';
+  const iv = CryptoJS.enc.Hex.parse(process.env.IV);
   if (typeof user.password !== 'string') {
     return Promise.reject(new Error('Invalid password'));
   }
   if (user.changed('password')) {
     const ciphertext = await CryptoJS.AES.encrypt(
       user.password,
-      process.env.secretKey
+      process.env.secretKey,
+      {
+        iv: iv,
+      }
     );
     user.password = ciphertext.toString();
+    console.log('iv:', iv);
   } else {
     return;
   }
@@ -27,9 +31,12 @@ async function hashPassword(user, options) {
 }
 
 function decryptPassword(ciphertext) {
-  // const secretKey = 'TestGym';
-  const bytes = CryptoJS.AES.decrypt(ciphertext, process.env.secretKey);
+  const iv = CryptoJS.enc.Hex.parse(process.env.IV);
+  const bytes = CryptoJS.AES.decrypt(ciphertext, process.env.secretKey, {
+    iv: iv,
+  });
   const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+  console.log('iv:', iv);
   return originalPassword;
 }
 
@@ -61,6 +68,14 @@ const User = sequelize.define(
     gender: DataTypes.CHAR,
     phone: DataTypes.STRING,
     height: DataTypes.STRING,
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true, // 允许为 null
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true, // 允许为 null
+    },
   },
   // {
   //   timestamps: false,
