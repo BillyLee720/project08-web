@@ -11,17 +11,18 @@ function jwtSignUser(user) {
   });
 }
 const transporter = nodemailer.createTransport({
-  service: 'your-email-service-provider',
+  service: 'gmail',
   auth: {
-    user: 'your-email-username',
-    pass: 'your-email-password',
+    user: '209410256@gms.tku.edu.tw',
+    pass: 'asdf74152',
   },
 });
 
 async function sendResetPasswordEmail(email) {
+  console.log(email);
   const resetPasswordLink = generateResetPasswordLink(email);
   const mailOptions = {
-    from: 'your-email-sender',
+    from: '209410256@gms.tku.edu.tw',
     to: email,
     subject: '重製密碼',
     text: `請點擊以下網址重製你的密碼: ${resetPasswordLink}`,
@@ -35,7 +36,9 @@ async function sendResetPasswordEmail(email) {
 }
 
 function generateResetPasswordLink(email) {
-  const resetPasswordLink = ``;
+  const resetPasswordLink = `http://localhost:8080/reset-password?email=${encodeURIComponent(
+    email
+  )}`;
   return resetPasswordLink;
 }
 
@@ -135,27 +138,30 @@ module.exports = {
   async forgotPassword(req, res) {
     const { email } = req.body;
     try {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ where: { email } });
       if (!user) {
         return res.status(404).json({ error: '用戶不存在' });
       }
-      const resetPasswordLink = generateResetPasswordLink(email);
-      await sendResetPasswordEmail(email, resetPasswordLink);
+      console.log(user.userid);
+      await sendResetPasswordEmail(email);
       res.status(200).json({ message: '重製密碼郵件已發送!' });
     } catch (err) {
       console.log(err);
     }
   },
   async resetPassword(req, res) {
-    const { userId, newPassword, confirmPassword } = req.body;
+    const { email, newPassword, confirmPassword } = req.body;
     try {
-      const user = await User.findByPk(userId);
+      const user = await User.findOne({ where: { email } });
       if (newPassword != confirmPassword) {
         return res.status(401).json({ error: '兩組密碼不相符' });
       }
+      console.log('originPassword', user.password);
       user.password = newPassword;
       await hashPassword(user);
+      await user.save();
       res.send(user);
+      console.log(newPassword);
     } catch (err) {
       console.log(err);
     }

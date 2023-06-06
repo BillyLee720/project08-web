@@ -125,24 +125,17 @@ export default {
           currentPassword: this.currentPassword,
           newPassword: this.newPassword,
         });
-        if (response.success) {
-          console.log('密碼已成功更改');
-          this.showChangePasswordSuccess();
-          this.showDialog = true;
-          this.$store.dispatch('setToken', null);
-          this.$store.dispatch('setUser', null);
-          this.$router.push('/login');
+        console.log('密碼已成功更改');
+        this.showChangePasswordSuccess();
+        this.$store.dispatch('setToken', null);
+        this.$store.dispatch('setUser', null);
 
-          // 清空表單輸入
-          this.currentPassword = '';
-          this.newPassword = '';
-          this.confirmPassword = '';
-        } else {
-          console.error('無法更改密碼:', response.error);
-          this.showChangePasswordError(response.error);
-        }
+        // 清空表單輸入
+        this.currentPassword = '';
+        this.newPassword = '';
+        this.confirmPassword = '';
       } catch (error) {
-        console.error('Failed to update user:', error);
+        console.error('無法更改密碼:', error);
         this.showChangePasswordError(error.response.data.error);
       }
     },

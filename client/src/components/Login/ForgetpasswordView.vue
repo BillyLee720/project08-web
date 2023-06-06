@@ -28,9 +28,11 @@ export default {
   methods: {
     async validateEmail() {
       try {
+        console.log(this.email);
         const response = await AuthenticationService.forgotPassword({
           email: this.email,
         });
+        console.log(response);
         toast.success('請檢察信箱中的郵件');
       } catch (err) {
         console.log(err);

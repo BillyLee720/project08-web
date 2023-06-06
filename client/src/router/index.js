@@ -11,6 +11,7 @@ import ShopView from '../views/ShopView.vue';
 import ErrorView from '../views/ErrorView.vue';
 import RecordView from '../views/RecordView.vue';
 import ChangePasswordView from '../views/ChangePasswordView.vue';
+import ResetPassword from '../views/resetPasswordView.vue';
 import { store } from '@/store/store';
 
 const routes = [
@@ -70,6 +71,12 @@ const routes = [
     path: '/changepassword',
     name: 'ChangePasswordView',
     component: ChangePasswordView,
+  },
+  {
+    path: '/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword,
+    props: (route) => ({ email: route.query.email }),
   },
 ];
 

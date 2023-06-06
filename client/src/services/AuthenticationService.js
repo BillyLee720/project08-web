@@ -20,6 +20,9 @@ export default {
     return Api().patch('/user/password', { userId, ...passwordData });
   },
   forgotPassword(credentials) {
-    return Api().post('forgotPassword', credentials);
+    return Api().post('forgotpassword', credentials);
+  },
+  resetPassword(userPassword) {
+    return Api().patch('reset-password', userPassword);
   },
 };
